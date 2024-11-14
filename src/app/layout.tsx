@@ -1,17 +1,10 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
+import { ReactNode } from "react";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import cl from "clsx";
+import type { Metadata } from "next";
+
+import { doto } from "./fonts";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,14 +14,13 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
+  const bodyClass = cl(doto.className, "antialiased w-full h-full bg-slate-300");
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className={"w-full h-full"}>
+      <body className={bodyClass}>
+        <main className={"w-full h-full"}>{children}</main>
       </body>
     </html>
   );
