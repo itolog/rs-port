@@ -1,5 +1,5 @@
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { models } from "@/config";
 import { animations } from "@/constants";
@@ -7,9 +7,12 @@ import * as THREE from "three";
 
 import { GLTFResult } from "@/components/AppCanvas/components/Avatar/types";
 
+import useAppStore from "@/store/appStore";
+import createSelectors from "@/store/createSelectors";
+
 const Avatar = (props: Partial<THREE.Group>) => {
   const group = useRef();
-  const [animation] = useState(animations.IDLE);
+  const animation = createSelectors(useAppStore).use.animation();
 
   const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
