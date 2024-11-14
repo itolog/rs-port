@@ -9,7 +9,7 @@ import { GLTFResult } from "@/components/AppCanvas/components/Avatar/types";
 
 const Avatar = (props: Partial<THREE.Group>) => {
   const group = useRef();
-  const [animation, setAnimation] = useState(animations.WALKING);
+  const [animation] = useState(animations.IDLE);
 
   const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);

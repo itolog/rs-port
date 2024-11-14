@@ -11,6 +11,7 @@ const AppCanvas = () => {
   return (
     <div className="w-full h-full">
       <Loader />
+      <h1 className={"text-slate-950 font-bold text-8xl"}>SERHII</h1>
       <Canvas>
         <Common />
         <Suspense fallback={null}>
