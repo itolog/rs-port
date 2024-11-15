@@ -64,7 +64,7 @@ const Avatar = (props: Partial<THREE.Group>) => {
   });
 
   return (
-    <group {...props} ref={group} scale={2} dispose={null}>
+    <group {...props} position={[0, 0, -2]} ref={group} scale={2} dispose={null}>
       <group name="Scene">
         <group name="Armature">
           <primitive object={nodes.Hips} />

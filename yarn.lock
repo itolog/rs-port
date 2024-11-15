@@ -1963,6 +1963,21 @@ foreground-child@^3.1.0:
     cross-spawn "^7.0.0"
     signal-exit "^4.0.1"
 
+framer-motion-3d@^11.11.17:
+  version "11.11.17"
+  resolved "https://registry.yarnpkg.com/framer-motion-3d/-/framer-motion-3d-11.11.17.tgz#c163ffa2135f0c4cdc104a9cd5ed690a1cc6a909"
+  integrity sha512-nnNDGU1VdKy27+uB1LFVVPyR1s34DrGFNEqjhQWZF+sYJ3TBN3FYb8UWtyWLUOyIHKwJdeOkylmt4nq9xwk1mA==
+  dependencies:
+    framer-motion "^11.11.17"
+    react-merge-refs "^2.0.1"
+
+framer-motion@^11.11.17:
+  version "11.11.17"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.11.17.tgz#fff0fd26b9b5c16dc0cc7e450f9af7db13fb35d0"
+  integrity sha512-O8QzvoKiuzI5HSAHbcYuL6xU+ZLXbrH7C8Akaato4JzQbX2ULNeniqC2Vo5eiCtFktX9XsJ+7nUhxcl2E2IjpA==
+  dependencies:
+    tslib "^2.4.0"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -2690,6 +2705,14 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
+motion@^11.11.17:
+  version "11.11.17"
+  resolved "https://registry.yarnpkg.com/motion/-/motion-11.11.17.tgz#f8c9ea68f0629d4af8674faacfb0c733882e1578"
+  integrity sha512-y6mXYElvJ5HHwPBUpYG/5wclKVGW4hJhqPkTjWccib5/WrcRM185adg3+4aSmG5iD10XKFt5uBOAiKwuzMHPPQ==
+  dependencies:
+    framer-motion "^11.11.17"
+    tslib "^2.4.0"
+
 ms@^2.1.1, ms@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
@@ -3055,6 +3078,11 @@ react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-merge-refs@^2.0.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-2.1.1.tgz#e46763f8f1b881c0226ee54a1a2a10ffefba0233"
+  integrity sha512-jLQXJ/URln51zskhgppGJ2ub7b2WFKGq3cl3NYKtlHoTG+dN2q7EzWrn3hN3EgPsTMvpR9tpq5ijdp7YwFZkag==
 
 react-reconciler@0.31.0-rc.0:
   version "0.31.0-rc.0"

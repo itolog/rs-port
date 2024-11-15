@@ -1,19 +1,19 @@
-import { ContactShadows, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+// import { useScroll } from "@react-three/drei";
+import { Center, Environment } from "@react-three/drei";
 import { useRef } from "react";
 
-import { useMobile } from "@/hooks/useMobile";
+// import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 
 import Avatar from "@/components/AppCanvas/components/Avatar/Avatar";
 import Floor from "@/components/AppCanvas/components/Floor/Floor";
 
-const SECTIONS_DISTANCE = 10;
+// const SECTIONS_DISTANCE = 10;
 
 const CanvasScene = () => {
   const sceneContainer = useRef<THREE.Group>();
-  const { isMobile, scaleFactor } = useMobile();
-  const scrollData = useScroll();
+  // const { isMobile, scaleFactor } = useMobile();
+  // const scrollData = useScroll();
   // useFrame(() => {
   //   if (isMobile) {
   //     sceneContainer.current.position.x =
@@ -28,11 +28,13 @@ const CanvasScene = () => {
   //   setSection(config.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]);
   // });
   return (
-    <>
+    <Center>
+      <Environment preset="night" />
       <Floor />
+
       <Avatar />
 
-      <group ref={sceneContainer}>
+      <group position-x={2} ref={sceneContainer}>
         {/* home */}
         <group>
           <mesh>
@@ -62,7 +64,7 @@ const CanvasScene = () => {
           </mesh>
         </group>
       </group>
-    </>
+    </Center>
   );
 };
 
