@@ -1,4 +1,3 @@
-import { MotionConfig } from "motion/react";
 import React from "react";
 
 import Home from "@/components/Pages/Home/Home";
@@ -11,11 +10,9 @@ const Pages = () => {
 
   if (loading) return null;
   return (
-    <MotionConfig transition={{ duration: 1 }}>
-      <div className={"w-screen h-screen absolute"}>
-        <Home />
-      </div>
-    </MotionConfig>
+    <div className={"w-screen h-screen absolute"}>
+      <Home />
+    </div>
   );
 };
 
