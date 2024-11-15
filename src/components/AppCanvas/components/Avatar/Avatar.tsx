@@ -1,8 +1,10 @@
-import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
+import { useAnimations, useFBX, useGLTF, useScroll } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 
 import { models } from "@/config";
 import { animations } from "@/constants";
+import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 
 import { GLTFResult } from "@/components/AppCanvas/components/Avatar/types";
@@ -11,16 +13,22 @@ import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
 
 const Avatar = (props: Partial<THREE.Group>) => {
-  const group = useRef();
-  const animation = createSelectors(useAppStore).use.animation();
+  const group = useRef<THREE.Group>();
+  const lastScroll = useRef(0);
 
+  const animation = createSelectors(useAppStore).use.animation();
+  const setAnimation = createSelectors(useAppStore).use.setAnimation();
+
+  const scrollState = useScroll();
   const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
   const { animations: walkAnim } = useFBX(models.avatarWalkinglUrl);
+  const { actions } = useAnimations([idleAnim[0], walkAnim[0]], group);
+
+  const { isMobile } = useMobile();
+
   idleAnim[0].name = animations.IDLE;
   walkAnim[0].name = animations.WALKING;
-
-  const { actions } = useAnimations([idleAnim[0], walkAnim[0]], group);
 
   useEffect(() => {
     actions[animation]?.reset().fadeIn(0.5).play();
@@ -30,8 +38,33 @@ const Avatar = (props: Partial<THREE.Group>) => {
     };
   }, [actions, animation]);
 
+  useFrame(() => {
+    const scrollDelta = scrollState.offset - lastScroll.current;
+    let rotationTarget = 0;
+    if (Math.abs(scrollDelta) > 0.0000001) {
+      setAnimation(animations.WALKING);
+      if (scrollDelta > 0) {
+        rotationTarget = isMobile ? Math.PI / 2 : 0;
+      } else {
+        rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
+      }
+    } else {
+      setAnimation(animations.IDLE);
+    }
+
+    if (group?.current?.rotation) {
+      group.current.rotation.y = THREE.MathUtils.lerp(
+        group.current.rotation.y,
+        rotationTarget,
+        0.1,
+      );
+    }
+
+    lastScroll.current = scrollState.offset;
+  });
+
   return (
-    <group {...props} ref={group} dispose={null}>
+    <group {...props} ref={group} scale={2} dispose={null}>
       <group name="Scene">
         <group name="Armature">
           <primitive object={nodes.Hips} />

@@ -16,7 +16,7 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const bodyClass = cl(doto.className, "antialiased w-full h-full bg-slate-300");
+  const bodyClass = cl(doto.className, "antialiased w-full h-full bg-slate-900");
   return (
     <html lang="en" className={"w-full h-full"}>
       <body className={bodyClass}>
