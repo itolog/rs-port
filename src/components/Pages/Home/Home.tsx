@@ -4,7 +4,7 @@ import HeroTitle from "@/components/HeroTitle/HeroTitle";
 
 const Home = () => {
   return (
-    <div>
+    <div className={"relative"}>
       <HeroTitle />
     </div>
   );

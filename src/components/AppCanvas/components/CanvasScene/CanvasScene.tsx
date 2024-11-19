@@ -7,6 +7,7 @@ import * as THREE from "three";
 
 import Avatar from "@/components/AppCanvas/components/Avatar/Avatar";
 import Floor from "@/components/AppCanvas/components/Floor/Floor";
+import Tesseract from "@/components/AppCanvas/components/Tesseract/Tesseract";
 
 // const SECTIONS_DISTANCE = 10;
 
@@ -33,6 +34,8 @@ const CanvasScene = () => {
       <Floor />
 
       <Avatar />
+
+      <Tesseract />
 
       <group position-x={2} ref={sceneContainer}>
         {/* home */}
