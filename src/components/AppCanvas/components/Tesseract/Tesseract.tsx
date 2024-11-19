@@ -1,8 +1,8 @@
-import { useAnimations, useGLTF } from "@react-three/drei";
+import { useAnimations, useGLTF, useScroll } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import React, { useEffect, useRef } from "react";
 
 import { models } from "@/config";
-// import { useControls } from "leva";
 import * as THREE from "three";
 
 import { ActionName, GLTFResult } from "@/components/AppCanvas/components/Tesseract/types";
@@ -15,7 +15,8 @@ const RECEIVE_SHADOW = true;
 const Tesseract = (props: Partial<THREE.Group>) => {
   const group = useRef<THREE.Group>();
   const { nodes, materials, animations } = useGLTF(models.tesseractUrl) as GLTFResult;
-  const { actions } = useAnimations(animations, group);
+  const scrollState = useScroll();
+  const { actions, mixer } = useAnimations(animations, group);
 
   useEffect(() => {
     actions[anim]?.reset().fadeIn(0.5).play();
@@ -25,12 +26,21 @@ const Tesseract = (props: Partial<THREE.Group>) => {
     };
   }, [actions]);
 
-  // const { position } = useControls("cube", {
-  //   position: [0, 0, 0],
-  // });
+  useFrame(() => {
+    if (mixer) {
+      // Adjust the animation time based on the scroll position
+      const scrollOffset = scrollState.offset; // 0 to 1
+      const action = actions[anim];
+      if (action) {
+        const duration = action.getClip().duration;
+        action.time = scrollOffset * duration; // Map scroll to animation duration
+        mixer.update(0); // Update the mixer to reflect the new time
+      }
+    }
+  });
 
   return (
-    <group ref={group} position={[5, 6, -7]} scale={2} {...props} dispose={null}>
+    <group ref={group} position={[8, 8, -10]} scale={1.2} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group name="root">
