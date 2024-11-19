@@ -2,12 +2,15 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import React, { useEffect, useRef } from "react";
 
 import { models } from "@/config";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 import * as THREE from "three";
 
 import { ActionName, GLTFResult } from "@/components/AppCanvas/components/Tesseract/types";
 
 const anim: ActionName = "Animation";
+
+const CAST_SHADOW = true;
+const RECEIVE_SHADOW = true;
 
 const Tesseract = (props: Partial<THREE.Group>) => {
   const group = useRef<THREE.Group>();
@@ -35,15 +38,15 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube_0">
                 <mesh
                   name="Object_4"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_4.geometry}
                   material={materials.box_out}
                 />
                 <mesh
                   name="Object_5"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_5.geometry}
                   material={materials.inner}
                 />
@@ -51,15 +54,15 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube001_3">
                 <mesh
                   name="Object_7"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_7.geometry}
                   material={materials.box_out}
                 />
                 <mesh
                   name="Object_8"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_8.geometry}
                   material={materials.inner}
                 />
@@ -67,15 +70,15 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube002_4">
                 <mesh
                   name="Object_10"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_10.geometry}
                   material={materials.box_out}
                 />
                 <mesh
                   name="Object_11"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_11.geometry}
                   material={materials.inner}
                 />
@@ -83,15 +86,15 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube003_5">
                 <mesh
                   name="Object_13"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_13.geometry}
                   material={materials.box_out}
                 />
                 <mesh
                   name="Object_14"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_14.geometry}
                   material={materials.inner}
                 />
@@ -99,15 +102,15 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube004_6">
                 <mesh
                   name="Object_16"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_16.geometry}
                   material={materials.box_out}
                 />
                 <mesh
                   name="Object_17"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_17.geometry}
                   material={materials.inner}
                 />
@@ -115,15 +118,15 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube005_7">
                 <mesh
                   name="Object_19"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_19.geometry}
                   material={materials.box_out}
                 />
                 <mesh
                   name="Object_20"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_20.geometry}
                   material={materials.inner}
                 />
@@ -131,15 +134,15 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube006_8">
                 <mesh
                   name="Object_22"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_22.geometry}
                   material={materials.box_out}
                 />
                 <mesh
                   name="Object_23"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_23.geometry}
                   material={materials.inner}
                 />
@@ -147,8 +150,8 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube007_9">
                 <mesh
                   name="Object_25"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_25.geometry}
                   material={materials.box_out}
                 />
@@ -156,8 +159,8 @@ const Tesseract = (props: Partial<THREE.Group>) => {
               <group name="Cube008_10" scale={0.283}>
                 <mesh
                   name="Object_27"
-                  castShadow
-                  receiveShadow
+                  castShadow={CAST_SHADOW}
+                  receiveShadow={RECEIVE_SHADOW}
                   geometry={nodes.Object_27.geometry}
                   material={materials["inner.001"]}
                 />
