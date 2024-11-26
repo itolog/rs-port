@@ -1,3 +1,5 @@
+"use client";
+
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
@@ -15,18 +17,34 @@ const HeroTitle = () => {
 
   useGSAP(
     () => {
-      gsap.fromTo(
+      const tl = gsap.timeline({});
+
+      tl.fromTo(
         ".box",
-        { opacity: 0, scale: 0 },
+        { opacity: 0, y: -10 },
         {
           duration: 1,
           opacity: 1,
-          scale: 1,
+          y: 0,
           stagger: (index) => {
             return index * 0.1;
           },
         },
       );
+
+      // tl.to(".box", {
+      //   duration: 1,
+      //   opacity: (i) => {
+      //     if (i > 0) {
+      //       return 0.1;
+      //     }
+      //     return 1;
+      //   },
+      //   scale: 1,
+      //   stagger: (index) => {
+      //     return index * 0.1;
+      //   },
+      // });
     },
     { scope: container },
   );

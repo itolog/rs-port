@@ -3,4 +3,5 @@ export const models = {
   avatarIdlelUrl: "/models/avatar/idle.fbx",
   avatarWalkinglUrl: "/models/avatar/walking.fbx",
   tesseractUrl: "/models/tesseract/scene.gltf",
+  nintendoUrl: "/models/nintendo/scene.gltf",
 };

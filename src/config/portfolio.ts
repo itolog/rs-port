@@ -1,7 +1,9 @@
+import { pages } from "@/constants";
+
 export const portfolio = {
   title: {
     label: "Serhii Romanichenko",
     description: "Frontend Developer",
   },
-  sections: ["home", "skills", "projects", "contact"],
+  sections: [pages.HOME, pages.SKILLS, pages.PROJECTS, pages.CONTACT],
 };
