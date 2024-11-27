@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 import { models } from "@/config";
 import { animations } from "@/constants";
-import { useMobile } from "@/hooks/useMobile";
+// import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 
 import { GLTFResult } from "@/components/AppCanvas/components/Avatar/types";
@@ -13,17 +13,16 @@ import createSelectors from "@/store/createSelectors";
 
 const Avatar = (props: Partial<THREE.Group>) => {
   const group = useRef<THREE.Group>();
-  const lastScroll = useRef(0);
 
   const animation = createSelectors(useAppStore).use.animation();
-  const setAnimation = createSelectors(useAppStore).use.setAnimation();
+  // const setAnimation = createSelectors(useAppStore).use.setAnimation();
 
   const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
   const { animations: walkAnim } = useFBX(models.avatarWalkinglUrl);
   const { actions } = useAnimations([idleAnim[0], walkAnim[0]], group);
 
-  const { isMobile } = useMobile();
+  // const { isMobile } = useMobile();
 
   idleAnim[0].name = animations.IDLE;
   walkAnim[0].name = animations.WALKING;

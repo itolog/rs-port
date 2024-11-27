@@ -18,6 +18,10 @@ const Pages = dynamic(() => import("@/components/Pages/Pages"), {
 });
 
 const AppCanvas = () => {
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
+  });
+
   return (
     <div className="w-full h-full relative">
       <Pages />

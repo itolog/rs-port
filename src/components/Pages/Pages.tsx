@@ -1,12 +1,9 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
 import { memo } from "react";
 
 import { pages } from "@/constants";
 import cl from "clsx";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
@@ -15,10 +12,6 @@ const commonStyle = "w-full h-screen";
 
 const Pages = () => {
   const loading = createSelectors(useAppStore).use.loading();
-
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
-  });
 
   if (loading) return null;
   return (

@@ -15,7 +15,7 @@ const Tesseract = (props: Partial<THREE.Group>) => {
   const group = useRef<THREE.Group>();
   const { nodes, materials, animations } = useGLTF(models.tesseractUrl) as GLTFResult;
 
-  const { actions, mixer } = useAnimations(animations, group);
+  const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
     actions[anim]?.reset().fadeIn(0.5).play();

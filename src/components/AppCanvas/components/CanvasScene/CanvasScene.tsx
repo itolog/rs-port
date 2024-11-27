@@ -4,9 +4,8 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { FC, useRef } from "react";
 
 import { pages } from "@/constants";
-import { useMobile } from "@/hooks/useMobile";
+// import { useMobile } from "@/hooks/useMobile";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
 
 import { camera as cameraConfig } from "@/config/canvas";
@@ -29,11 +28,9 @@ const CanvasScene: FC<CanvasSceneProps> = () => {
     positionY: 0,
   };
 
-  const { isMobile, scaleFactor } = useMobile();
+  // const { isMobile, scaleFactor } = useMobile();
 
   useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     if (!skillsRef?.current) return;
 
     gsap.fromTo(
