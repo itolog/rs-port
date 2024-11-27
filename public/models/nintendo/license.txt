@@ -1,0 +1,8 @@
+Model Information:
+* title:	Nintendo Switch
+* source:	https://sketchfab.com/3d-models/nintendo-switch-883ac94edd8e45eaae3dfeff36064678
+* author:	AleksanderWawa (https://sketchfab.com/AleksanderWawa)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
