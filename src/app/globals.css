@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --base-unit: calc(1vw + 1vh);
 }
 
 @media (prefers-color-scheme: dark) {
