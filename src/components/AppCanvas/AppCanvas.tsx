@@ -1,10 +1,11 @@
 "use client";
 
-import { Scroll, ScrollControls } from "@react-three/drei";
+import { useGSAP } from "@gsap/react";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 
-import { portfolio } from "@/config";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
 
 import CanvasScene from "@/components/AppCanvas/components/CanvasScene/CanvasScene";
@@ -19,21 +20,16 @@ const Pages = dynamic(() => import("@/components/Pages/Pages"), {
 const AppCanvas = () => {
   return (
     <div className="w-full h-full relative">
-      <Canvas camera={{ position: [0, 0.5, 5] }}>
-        <Common />
+      <Pages />
+      <div className={"fixed top-0 left-0 w-full h-full"}>
+        <Canvas camera={{ position: [0, 0.5, 5] }} className={"absolute"}>
+          <Common />
 
-        <ScrollControls pages={portfolio.sections.length} damping={0.1} maxSpeed={0.2}>
           <Suspense fallback={<CanvasLoader />}>
             <CanvasScene />
           </Suspense>
-
-          <Suspense>
-            <Scroll html>
-              <Pages />
-            </Scroll>
-          </Suspense>
-        </ScrollControls>
-      </Canvas>
+        </Canvas>
+      </div>
     </div>
   );
 };

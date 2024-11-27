@@ -1,5 +1,4 @@
-import { useAnimations, useFBX, useGLTF, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 
 import { models } from "@/config";
@@ -19,7 +18,6 @@ const Avatar = (props: Partial<THREE.Group>) => {
   const animation = createSelectors(useAppStore).use.animation();
   const setAnimation = createSelectors(useAppStore).use.setAnimation();
 
-  const scrollState = useScroll();
   const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
   const { animations: walkAnim } = useFBX(models.avatarWalkinglUrl);
@@ -38,30 +36,30 @@ const Avatar = (props: Partial<THREE.Group>) => {
     };
   }, [actions, animation]);
 
-  useFrame(() => {
-    const scrollDelta = scrollState.offset - lastScroll.current;
-    let rotationTarget = 0;
-    if (Math.abs(scrollDelta) > 0.0000001) {
-      setAnimation(animations.WALKING);
-      if (scrollDelta > 0) {
-        rotationTarget = isMobile ? Math.PI / 2 : 0;
-      } else {
-        rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
-      }
-    } else {
-      setAnimation(animations.IDLE);
-    }
-
-    if (group?.current?.rotation) {
-      group.current.rotation.y = THREE.MathUtils.lerp(
-        group.current.rotation.y,
-        rotationTarget,
-        0.1,
-      );
-    }
-
-    lastScroll.current = scrollState.offset;
-  });
+  // useFrame(() => {
+  //   const scrollDelta = scrollState.offset - lastScroll.current;
+  //   let rotationTarget = 0;
+  //   if (Math.abs(scrollDelta) > 0.0000001) {
+  //     setAnimation(animations.WALKING);
+  //     if (scrollDelta > 0) {
+  //       rotationTarget = isMobile ? Math.PI / 2 : 0;
+  //     } else {
+  //       rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
+  //     }
+  //   } else {
+  //     setAnimation(animations.IDLE);
+  //   }
+  //
+  //   if (group?.current?.rotation) {
+  //     group.current.rotation.y = THREE.MathUtils.lerp(
+  //       group.current.rotation.y,
+  //       rotationTarget,
+  //       0.1,
+  //     );
+  //   }
+  //
+  //   lastScroll.current = scrollState.offset;
+  // });
 
   return (
     <group {...props} position={[0, 0, -3]} ref={group} scale={2} dispose={null}>
