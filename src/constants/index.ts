@@ -6,5 +6,5 @@ export const pages = {
   HOME: "home",
   SKILLS: "skills",
   PROJECTS: "projects",
-  CONTACT: "contact",
+  CONTACT: "contacts",
 } as const;

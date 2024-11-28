@@ -6,6 +6,7 @@ import { Suspense } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TextPlugin } from "gsap/TextPlugin";
 import dynamic from "next/dynamic";
 
 import CanvasScene from "@/components/AppCanvas/components/CanvasScene/CanvasScene";
@@ -19,7 +20,7 @@ const Pages = dynamic(() => import("@/components/Pages/Pages"), {
 
 const AppCanvas = () => {
   useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, TextPlugin);
   });
 
   return (
