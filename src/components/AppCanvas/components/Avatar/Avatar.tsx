@@ -13,7 +13,7 @@ import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
 
 const Avatar = (props: Partial<THREE.Group>) => {
-  const group = useRef<THREE.Group>();
+  const group = useRef<THREE.Group>(null);
   const lastScroll = useRef(0);
 
   const scrollState = useScroll();

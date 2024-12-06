@@ -74,11 +74,11 @@ const CanvasScene = () => {
       <group ref={sceneContainer}>
         {/* home */}
         <group position-y={-5}>
-          <Tesseract />
+          <Nintendo />
         </group>
         {/* skills */}
         <group ref={skillsRef} position-y={-5} position-z={SECTIONS_DISTANCE}>
-          <Nintendo />
+          <Tesseract />
         </group>
         {/* projects */}
         <group ref={progRef} position-y={-5} position-z={isMobile ? -3 : 2 * SECTIONS_DISTANCE}>
