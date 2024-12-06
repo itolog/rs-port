@@ -16,10 +16,10 @@ const Pages = () => {
   if (loading) return null;
   return (
     <>
-      <section className={cl(pages.HOME, commonStyle)}>{pages.HOME}</section>
-      <section className={cl(pages.SKILLS, commonStyle)}>{pages.SKILLS}</section>
-      <section className={cl(pages.PROJECTS, commonStyle)}>{pages.PROJECTS}</section>
-      <section className={cl(pages.CONTACT, commonStyle)}>{pages.CONTACT}</section>
+      <section className={cl(pages.HOME, commonStyle)} />
+      <section className={cl(pages.SKILLS, commonStyle)} />
+      <section className={cl(pages.PROJECTS, commonStyle)} />
+      <section className={cl(pages.CONTACT, commonStyle)} />
     </>
   );
 };

@@ -1,19 +1,47 @@
 "use client";
 
 import { useGLTF } from "@react-three/drei";
+import { useEffect, useRef } from "react";
 
 import { models } from "@/config";
+import { useMobile } from "@/hooks/useMobile";
+import gsap from "gsap";
 import * as THREE from "three";
 
 import { GLTFResult } from "@/components/AppCanvas/components/Nintendo/types";
+import VideoMaterial from "@/components/AppCanvas/components/VideoMaterial/VideoMaterial";
 
 const CAST_SHADOW = true;
 const RECEIVE_SHADOW = true;
 
 const Nintendo = (props: Partial<THREE.Group>) => {
+  const ref = useRef<THREE.Group>(null);
   const { nodes, materials } = useGLTF(models.nintendoUrl) as GLTFResult;
+  const { isMobile } = useMobile();
+  useEffect(() => {
+    if (!ref.current) return;
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+      ref.current.position,
+      {
+        y: 0,
+      },
+      {
+        y: 3.5,
+        ease: "power1.out",
+        duration: 2,
+        delay: 1.3,
+      },
+    ).to(ref.current.rotation, {
+      x: 1.3,
+      ease: "bounce.out",
+      duration: 1,
+    });
+  }, []);
+
   return (
-    <group {...props} position={[0, 0, 0]} dispose={null}>
+    <group ref={ref} scale={isMobile ? 2 : 3} position-z={-10} {...props} dispose={null}>
       <group name="fc931cdec9ec4ab0be81a87dc0fc3b21fbx" scale={0.01}>
         <group
           name="Cube"
@@ -27,13 +55,16 @@ const Nintendo = (props: Partial<THREE.Group>) => {
             geometry={nodes.Cube_screen_1_0.geometry}
             material={materials.screen_1}
           />
+
           <mesh
             name="Cube_screen_glass_0"
             castShadow={CAST_SHADOW}
             receiveShadow={RECEIVE_SHADOW}
             geometry={nodes.Cube_screen_glass_0.geometry}
-            material={materials.screen_glass}
-          />
+            material={materials.screen_glass}>
+            <planeGeometry args={[2.4, 2]} />
+            <VideoMaterial />
+          </mesh>
           <mesh
             name="Cube_screen_2_0"
             castShadow={CAST_SHADOW}
