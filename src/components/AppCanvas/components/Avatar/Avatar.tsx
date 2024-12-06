@@ -13,17 +13,17 @@ import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
 
 const Avatar = (props: Partial<THREE.Group>) => {
-  const group = useRef<THREE.Group>();
+  const group = useRef<THREE.Group>(null);
   const lastScroll = useRef(0);
-
-  const animation = createSelectors(useAppStore).use.animation();
-  const setAnimation = createSelectors(useAppStore).use.setAnimation();
 
   const scrollState = useScroll();
   const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
   const { animations: walkAnim } = useFBX(models.avatarWalkinglUrl);
   const { actions } = useAnimations([idleAnim[0], walkAnim[0]], group);
+
+  const animation = createSelectors(useAppStore).use.animation();
+  const setAnimation = createSelectors(useAppStore).use.setAnimation();
 
   const { isMobile } = useMobile();
 
@@ -64,7 +64,13 @@ const Avatar = (props: Partial<THREE.Group>) => {
   });
 
   return (
-    <group {...props} position={[0, 0, -3]} ref={group} scale={2} dispose={null}>
+    <group
+      {...props}
+      position-z={isMobile ? -5 : -3}
+      position-y={-5}
+      ref={group}
+      scale={2}
+      dispose={null}>
       <group name="Scene">
         <group name="Armature">
           <primitive object={nodes.Hips} />
