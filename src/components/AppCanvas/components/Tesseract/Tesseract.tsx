@@ -12,7 +12,7 @@ const CAST_SHADOW = true;
 const RECEIVE_SHADOW = true;
 
 const Tesseract = (props: Partial<THREE.Group>) => {
-  const group = useRef<THREE.Group>();
+  const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF(models.tesseractUrl) as GLTFResult;
 
   const { actions } = useAnimations(animations, group);
