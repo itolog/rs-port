@@ -1,10 +1,10 @@
 import { useGSAP } from "@gsap/react";
-import { Center, Environment } from "@react-three/drei";
+import { Center, Environment, useScroll } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { FC, useRef } from "react";
+import { useRef } from "react";
 
-import { pages } from "@/constants";
-// import { useMobile } from "@/hooks/useMobile";
+import { portfolio } from "@/config";
+import { useMobile } from "@/hooks/useMobile";
 import gsap from "gsap";
 import * as THREE from "three";
 
@@ -15,20 +15,37 @@ import Floor from "@/components/AppCanvas/components/Floor/Floor";
 import Nintendo from "@/components/AppCanvas/components/Nintendo/Nintendo";
 import Tesseract from "@/components/AppCanvas/components/Tesseract/Tesseract";
 
+import useAppStore from "@/store/appStore";
+import createSelectors from "@/store/createSelectors";
+
 const SECTIONS_DISTANCE = 10;
 
-interface CanvasSceneProps {}
-
-const CanvasScene: FC<CanvasSceneProps> = () => {
+const CanvasScene = () => {
+  const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
   const camera = useThree((state) => state.camera);
-  const viewport = useThree((state) => state.viewport);
   const skillsRef = useRef<THREE.Group>(null);
-  const skillsAnim = {
-    rotationX: 0,
-    positionY: 0,
-  };
+  const progRef = useRef<THREE.Group>(null);
+  const contactsRef = useRef<THREE.Group>(null);
+  const sceneContainer = useRef<THREE.Group>(null);
 
-  // const { isMobile, scaleFactor } = useMobile();
+  const { isMobile, scaleFactor } = useMobile();
+
+  const scrollData = useScroll();
+  useFrame(() => {
+    if (!sceneContainer.current) return;
+
+    if (isMobile) {
+      sceneContainer.current.position.x =
+        -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+      sceneContainer.current.position.z = 0;
+    } else {
+      sceneContainer.current.position.z =
+        -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+      sceneContainer.current.position.x = 0;
+    }
+
+    setCurrentSection(portfolio.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]);
+  });
 
   useGSAP(() => {
     if (!skillsRef?.current) return;
@@ -37,71 +54,44 @@ const CanvasScene: FC<CanvasSceneProps> = () => {
       camera.position,
       { y: 10, z: 10 },
       {
-        y: cameraConfig.position.y,
+        y: cameraConfig.position.y + scaleFactor,
         z: cameraConfig.position.z,
         ease: "power1.out",
         duration: 1,
+        onUpdate: () => {
+          camera.lookAt(0, 0, 0);
+        },
       },
     );
-    // SKILLS
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: `.${pages.HOME}`,
-          start: "top top",
-          endTrigger: `.${pages.SKILLS}`,
-          end: "bottom bottom",
-          markers: true,
-          scrub: 1,
-        },
-      })
-      .to(camera.position, {
-        y: skillsRef.current.position.y,
-        z: skillsRef.current.position.z + SECTIONS_DISTANCE,
-        ease: "power1.out",
-        duration: 2,
-      })
-      .to(skillsAnim, {
-        rotationX: 1.3,
-        positionY: 4.2,
-        ease: "power1.out",
-        duration: 1,
-      });
-  });
-
-  useFrame(() => {
-    if (!skillsRef?.current) return;
-    skillsRef.current.rotation.x = skillsAnim.rotationX;
-    skillsRef.current.position.y = skillsAnim.positionY;
   });
 
   return (
     <Center>
       <Environment preset="night" />
       <Floor />
+      <Avatar />
 
-      <group>
+      <group ref={sceneContainer}>
         {/* home */}
-        <group>
-          <Avatar />
+        <group position-y={-5}>
           <Tesseract />
         </group>
         {/* skills */}
-        <group ref={skillsRef} scale={viewport.aspect} position={[0, 0, SECTIONS_DISTANCE]}>
+        <group ref={skillsRef} position-y={-5} position-z={SECTIONS_DISTANCE}>
           <Nintendo />
         </group>
         {/* projects */}
-        <group>
+        <group ref={progRef} position-y={-5} position-z={isMobile ? -3 : 2 * SECTIONS_DISTANCE}>
           <mesh>
             <boxGeometry />
-            <meshStandardMaterial />
+            <meshStandardMaterial color={"#8f1d1d"} />
           </mesh>
         </group>
         {/* contact */}
-        <group>
+        <group ref={contactsRef} position-y={-5} position-z={isMobile ? -4 : 3 * SECTIONS_DISTANCE}>
           <mesh>
             <boxGeometry />
-            <meshStandardMaterial />
+            <meshStandardMaterial color={"#3ecc55"} />
           </mesh>
         </group>
       </group>

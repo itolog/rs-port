@@ -1,4 +1,4 @@
-import { Html, useProgress } from "@react-three/drei";
+import { useProgress } from "@react-three/drei";
 import { useEffect } from "react";
 
 import cl from "clsx";
@@ -11,8 +11,9 @@ const CanvasLoader = () => {
 
   const setLoading = createSelectors(useAppStore).use.setLoading();
 
-  const rootClass = cl("flex justify-center items-center w-screen h-screen", {
+  const rootClass = cl("fixed flex justify-center items-center w-screen h-screen", {
     "opacity-0": !active ? 1 : 0,
+    hidden: !active ? 1 : 0,
   });
 
   useEffect(() => {
@@ -22,9 +23,9 @@ const CanvasLoader = () => {
   }, [progress, setLoading]);
 
   return (
-    <Html center className={rootClass}>
+    <div className={rootClass}>
       <span className={"text-4xl text-cyan-300"}>{parseInt(progress.toString())} % loaded</span>
-    </Html>
+    </div>
   );
 };
 
