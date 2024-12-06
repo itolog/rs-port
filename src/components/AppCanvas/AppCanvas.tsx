@@ -9,17 +9,12 @@ import { portfolio } from "@/config";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
-import dynamic from "next/dynamic";
 
 import CanvasScene from "@/components/AppCanvas/components/CanvasScene/CanvasScene";
 import Common from "@/components/AppCanvas/components/Common/Common";
 import HeroTitle from "@/components/HeroTitle/HeroTitle";
+import Pages from "@/components/Pages/Pages";
 import CanvasLoader from "@/components/ui/Loaders/CanvasLoader/CanvasLoader";
-import PoLoader from "@/components/ui/Loaders/PoLoader/PoLoader";
-
-const Pages = dynamic(() => import("@/components/Pages/Pages"), {
-  loading: () => <PoLoader />,
-});
 
 const AppCanvas = () => {
   useGSAP(() => {

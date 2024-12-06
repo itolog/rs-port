@@ -23,7 +23,8 @@ const HeroTitle = () => {
 
     gsap.to(textRef.current, {
       text: portfolio.sectionsTitle[currentSection as keyof typeof portfolio.sectionsTitle],
-      duration: 1,
+      duration: 2,
+      ease: "easeInOut",
     });
   }, [currentSection, loading]);
 
