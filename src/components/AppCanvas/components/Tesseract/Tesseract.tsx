@@ -8,7 +8,7 @@ import { ActionName, GLTFResult } from "@/components/AppCanvas/components/Tesser
 
 const anim: ActionName = "Animation";
 
-const CAST_SHADOW = true;
+const CAST_SHADOW = false;
 const RECEIVE_SHADOW = true;
 
 const Tesseract = (props: Partial<THREE.Group>) => {

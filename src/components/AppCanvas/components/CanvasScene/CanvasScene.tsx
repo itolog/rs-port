@@ -1,5 +1,10 @@
 import { useGSAP } from "@gsap/react";
-import { Center, Environment, useScroll } from "@react-three/drei";
+import {
+  Center,
+  Environment,
+  // useDepthBuffer,
+  useScroll,
+} from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 
@@ -12,6 +17,7 @@ import { camera as cameraConfig } from "@/config/canvas";
 
 import Avatar from "@/components/AppCanvas/components/Avatar/Avatar";
 import Floor from "@/components/AppCanvas/components/Floor/Floor";
+// import MovingSpot from "@/components/AppCanvas/components/MovingSpot/MovingSpot";
 import Nintendo from "@/components/AppCanvas/components/Nintendo/Nintendo";
 import Tesseract from "@/components/AppCanvas/components/Tesseract/Tesseract";
 
@@ -64,13 +70,15 @@ const CanvasScene = () => {
       },
     );
   });
-
+  // const depthBuffer = useDepthBuffer({ frames: 1 });
   return (
     <Center>
       <Environment preset="night" />
+
       <Floor />
       <Avatar />
-
+      {/* <MovingSpot depthBuffer={depthBuffer} color="#0c8cbf" position={[3, 0, 2]} /> */}
+      {/* <MovingSpot depthBuffer={depthBuffer} color="#b00c3f" position={[2, 0, 0]} /> */}
       <group ref={sceneContainer}>
         {/* home */}
         <group position-y={-5}>
