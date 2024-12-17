@@ -1,10 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import {
-  Center,
-  Environment,
-  // useDepthBuffer,
-  useScroll,
-} from "@react-three/drei";
+import { Float, useScroll } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 
@@ -12,19 +7,22 @@ import { portfolio } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
 import gsap from "gsap";
 import * as THREE from "three";
+import { Vector3 } from "three";
 
 import { camera as cameraConfig } from "@/config/canvas";
 
 import Avatar from "@/components/AppCanvas/components/Avatar/Avatar";
+import Disk from "@/components/AppCanvas/components/Disk/Disk";
 import Floor from "@/components/AppCanvas/components/Floor/Floor";
-// import MovingSpot from "@/components/AppCanvas/components/MovingSpot/MovingSpot";
-import Nintendo from "@/components/AppCanvas/components/Nintendo/Nintendo";
-import Tesseract from "@/components/AppCanvas/components/Tesseract/Tesseract";
+
+// import Nintendo from "@/components/AppCanvas/components/Nintendo/Nintendo";
 
 import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
 
 const SECTIONS_DISTANCE = 10;
+
+const FLOPPY_POS = new Vector3(-4, 1, -4);
 
 const CanvasScene = () => {
   const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
@@ -34,7 +32,7 @@ const CanvasScene = () => {
   const contactsRef = useRef<THREE.Group>(null);
   const sceneContainer = useRef<THREE.Group>(null);
 
-  const { isMobile, scaleFactor } = useMobile();
+  const { isMobile } = useMobile();
 
   const scrollData = useScroll();
   useFrame(() => {
@@ -60,7 +58,7 @@ const CanvasScene = () => {
       camera.position,
       { y: 10, z: 10 },
       {
-        y: cameraConfig.position.y + scaleFactor,
+        y: 3,
         z: cameraConfig.position.z,
         ease: "power1.out",
         duration: 1,
@@ -72,38 +70,43 @@ const CanvasScene = () => {
   });
   // const depthBuffer = useDepthBuffer({ frames: 1 });
   return (
-    <Center>
-      <Environment preset="night" />
-
+    <>
       <Floor />
       <Avatar />
+      {/* <OrbitControls /> */}
       {/* <MovingSpot depthBuffer={depthBuffer} color="#0c8cbf" position={[3, 0, 2]} /> */}
       {/* <MovingSpot depthBuffer={depthBuffer} color="#b00c3f" position={[2, 0, 0]} /> */}
       <group ref={sceneContainer}>
         {/* home */}
-        <group position-y={-5}>
-          <Nintendo />
+        <group>
+          <Float speed={1} rotationIntensity={1} floatIntensity={1} floatingRange={[1, 3]}>
+            <Disk position={FLOPPY_POS} />
+          </Float>
         </group>
         {/* skills */}
-        <group ref={skillsRef} position-y={-5} position-z={SECTIONS_DISTANCE}>
-          <Tesseract />
+        <group ref={skillsRef} position-z={SECTIONS_DISTANCE}>
+          {/* <Nintendo /> */}
+          <mesh>
+            <boxGeometry />
+            <meshStandardMaterial color={"#121bb7"} />
+          </mesh>
         </group>
         {/* projects */}
-        <group ref={progRef} position-y={-5} position-z={isMobile ? -3 : 2 * SECTIONS_DISTANCE}>
+        <group ref={progRef} position-z={isMobile ? -3 : 2 * SECTIONS_DISTANCE}>
           <mesh>
             <boxGeometry />
             <meshStandardMaterial color={"#8f1d1d"} />
           </mesh>
         </group>
         {/* contact */}
-        <group ref={contactsRef} position-y={-5} position-z={isMobile ? -4 : 3 * SECTIONS_DISTANCE}>
+        <group ref={contactsRef} position-z={isMobile ? -4 : 3 * SECTIONS_DISTANCE}>
           <mesh>
             <boxGeometry />
             <meshStandardMaterial color={"#3ecc55"} />
           </mesh>
         </group>
       </group>
-    </Center>
+    </>
   );
 };
 

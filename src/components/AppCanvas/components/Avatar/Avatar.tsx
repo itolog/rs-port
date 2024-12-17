@@ -66,8 +66,8 @@ const Avatar = (props: Partial<THREE.Group>) => {
   return (
     <group
       {...props}
+      position-y={-0.05}
       position-z={isMobile ? -5 : -3}
-      position-y={-5}
       ref={group}
       scale={2}
       dispose={null}>
