@@ -20,7 +20,8 @@ const Avatar = (props: Partial<THREE.Group>) => {
   const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
   const { animations: walkAnim } = useFBX(models.avatarWalkinglUrl);
-  const { actions } = useAnimations([idleAnim[0], walkAnim[0]], group);
+  const { animations: helloAnim } = useFBX(models.avatarHelllolUrl);
+  const { actions } = useAnimations([idleAnim[0], walkAnim[0], helloAnim[0]], group);
 
   const animation = createSelectors(useAppStore).use.animation();
   const setAnimation = createSelectors(useAppStore).use.setAnimation();
@@ -29,12 +30,28 @@ const Avatar = (props: Partial<THREE.Group>) => {
 
   idleAnim[0].name = animations.IDLE;
   walkAnim[0].name = animations.WALKING;
+  helloAnim[0].name = animations.HELLO;
 
   useEffect(() => {
-    actions[animation]?.reset().fadeIn(0.5).play();
+    actions[animation]?.play();
+
+    setTimeout(() => {
+      actions[animation]?.fadeOut(0.5);
+      actions[animations.HELLO]?.reset().fadeIn(0.5).play();
+    }, 1000);
+
+    setTimeout(() => {
+      actions[animations.HELLO]?.fadeOut(0.5);
+      actions[animation]?.reset().fadeIn(0.5).play();
+    }, 2000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    actions[animation]?.reset().fadeIn(0.2).play();
 
     return () => {
-      actions[animation]?.fadeOut(0.5);
+      actions[animation]?.fadeOut(0.2);
     };
   }, [actions, animation]);
 

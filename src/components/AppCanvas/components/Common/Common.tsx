@@ -11,7 +11,7 @@ const Common = () => {
       <AdaptiveDpr pixelated />
       <AdaptiveEvents />
 
-      <fog attach="fog" args={[COLORS.MAIN, 8, 20]} />
+      <fog attach="fog" args={[COLORS.MAIN, 12, 20]} />
       <Environment preset="warehouse" environmentIntensity={0.5} />
     </>
   );
