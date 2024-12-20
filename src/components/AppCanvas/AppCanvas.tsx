@@ -25,7 +25,7 @@ const AppCanvas = () => {
     <>
       <CanvasLoader />
       <HeroTitle />
-      <Canvas camera={{ position: [0, 0.5, 5] }}>
+      <Canvas shadows camera={{ position: [0, 0.5, 5] }}>
         <Common />
 
         <ScrollControls pages={portfolio.sections.length} damping={0.1} maxSpeed={0.2}>

@@ -1,19 +1,18 @@
 import { useGSAP } from "@gsap/react";
-import { Float, useScroll } from "@react-three/drei";
+import { Float, Text3D, useScroll } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 
-import { portfolio } from "@/config";
+import { COLORS, portfolio } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
 import gsap from "gsap";
 import * as THREE from "three";
-import { Vector3 } from "three";
 
 import { camera as cameraConfig } from "@/config/canvas";
 
 import Avatar from "@/components/AppCanvas/components/Avatar/Avatar";
 import Disk from "@/components/AppCanvas/components/Disk/Disk";
-import Floor from "@/components/AppCanvas/components/Floor/Floor";
+import Ground from "@/components/AppCanvas/components/Ground/Ground";
 
 // import Nintendo from "@/components/AppCanvas/components/Nintendo/Nintendo";
 
@@ -21,8 +20,6 @@ import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
 
 const SECTIONS_DISTANCE = 10;
-
-const FLOPPY_POS = new Vector3(-4, 1, -4);
 
 const CanvasScene = () => {
   const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
@@ -68,23 +65,34 @@ const CanvasScene = () => {
       },
     );
   });
-  // const depthBuffer = useDepthBuffer({ frames: 1 });
   return (
     <>
-      <Floor />
+      <Ground />
       <Avatar />
-      {/* <OrbitControls /> */}
-      {/* <MovingSpot depthBuffer={depthBuffer} color="#0c8cbf" position={[3, 0, 2]} /> */}
-      {/* <MovingSpot depthBuffer={depthBuffer} color="#b00c3f" position={[2, 0, 0]} /> */}
+
       <group ref={sceneContainer}>
         {/* home */}
         <group>
-          <Float speed={1} rotationIntensity={1} floatIntensity={1} floatingRange={[1, 3]}>
-            <Disk position={FLOPPY_POS} />
+          <Text3D
+            letterSpacing={0.00001}
+            size={isMobile ? 0.4 : 0.8}
+            position-y={4}
+            position-z={-8}
+            position-x={isMobile ? -4 : -7}
+            font="/fonts/Cyberpunk_Regular.json">
+            Serhii Romanichenko
+            <meshStandardMaterial color={COLORS.PRIMARY} />
+          </Text3D>
+
+          <Float speed={1} rotationIntensity={1} floatIntensity={1} floatingRange={[1, 1.5]}>
+            <Disk />
           </Float>
         </group>
         {/* skills */}
-        <group ref={skillsRef} position-z={SECTIONS_DISTANCE}>
+        <group
+          ref={skillsRef}
+          position-x={isMobile ? SECTIONS_DISTANCE : 0}
+          position-z={isMobile ? -4 : SECTIONS_DISTANCE}>
           {/* <Nintendo /> */}
           <mesh>
             <boxGeometry />
@@ -92,14 +100,20 @@ const CanvasScene = () => {
           </mesh>
         </group>
         {/* projects */}
-        <group ref={progRef} position-z={isMobile ? -3 : 2 * SECTIONS_DISTANCE}>
+        <group
+          ref={progRef}
+          position-x={isMobile ? 2 * SECTIONS_DISTANCE : 0}
+          position-z={isMobile ? -3 : 2 * SECTIONS_DISTANCE}>
           <mesh>
             <boxGeometry />
             <meshStandardMaterial color={"#8f1d1d"} />
           </mesh>
         </group>
         {/* contact */}
-        <group ref={contactsRef} position-z={isMobile ? -4 : 3 * SECTIONS_DISTANCE}>
+        <group
+          ref={contactsRef}
+          position-x={isMobile ? 3 * SECTIONS_DISTANCE : 0}
+          position-z={isMobile ? -4 : 3 * SECTIONS_DISTANCE}>
           <mesh>
             <boxGeometry />
             <meshStandardMaterial color={"#3ecc55"} />

@@ -1,6 +1,7 @@
 import { AdaptiveDpr, AdaptiveEvents, Environment } from "@react-three/drei";
 
-import { IS_DEV, MAIN_COLOR } from "@/constants";
+import { COLORS } from "@/config";
+import { IS_DEV } from "@/constants";
 import Stats from "@/utils/Stats/Stats";
 
 const Common = () => {
@@ -9,10 +10,9 @@ const Common = () => {
       {IS_DEV && <Stats />}
       <AdaptiveDpr pixelated />
       <AdaptiveEvents />
-      <ambientLight intensity={1} />
-      <color attach="background" args={[MAIN_COLOR]} />
-      <fog attach="fog" args={[MAIN_COLOR, 12, 20]} />
-      <Environment preset="night" />
+
+      <fog attach="fog" args={[COLORS.MAIN, 8, 20]} />
+      <Environment preset="warehouse" environmentIntensity={0.5} />
     </>
   );
 };

@@ -8,5 +8,3 @@ export const pages = {
   PROJECTS: "projects",
   CONTACT: "contacts",
 } as const;
-
-export const MAIN_COLOR = "#0f172a";
