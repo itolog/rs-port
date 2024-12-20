@@ -1,3 +1,5 @@
+"use client";
+
 import { useAnimations, useFBX, useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
@@ -21,6 +23,11 @@ const Avatar = (props: Partial<THREE.Group>) => {
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
   const { animations: walkAnim } = useFBX(models.avatarWalkinglUrl);
   const { animations: helloAnim } = useFBX(models.avatarHelllolUrl);
+
+  idleAnim[0].name = animations.IDLE;
+  walkAnim[0].name = animations.WALKING;
+  helloAnim[0].name = animations.HELLO;
+
   const { actions } = useAnimations([idleAnim[0], walkAnim[0], helloAnim[0]], group);
 
   const animation = createSelectors(useAppStore).use.animation();
@@ -28,12 +35,8 @@ const Avatar = (props: Partial<THREE.Group>) => {
 
   const { isMobile } = useMobile();
 
-  idleAnim[0].name = animations.IDLE;
-  walkAnim[0].name = animations.WALKING;
-  helloAnim[0].name = animations.HELLO;
-
   useEffect(() => {
-    actions[animation]?.play();
+    actions[animation]?.reset().fadeIn(0.5).play();
 
     setTimeout(() => {
       actions[animation]?.fadeOut(0.5);
@@ -48,10 +51,10 @@ const Avatar = (props: Partial<THREE.Group>) => {
   }, []);
 
   useEffect(() => {
-    actions[animation]?.reset().fadeIn(0.2).play();
+    actions[animation]?.reset().fadeIn(0.5).play();
 
     return () => {
-      actions[animation]?.fadeOut(0.2);
+      actions[animation]?.fadeOut(0.5);
     };
   }, [actions, animation]);
 
