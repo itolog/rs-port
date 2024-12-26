@@ -21,7 +21,7 @@ const Pages = () => {
   return (
     <>
       <section className={cl(pages.HOME, commonStyle)} />
-      <section className={cl("flex gap-2 flex-col", commonStyle)}>
+      <section className={cl("flex gap-2 items-end flex-col", commonStyle)}>
         {skills.map((skill) => {
           return <SkillCard key={skill} skill={skill} />;
         })}

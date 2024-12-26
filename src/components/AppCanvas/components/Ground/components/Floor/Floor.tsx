@@ -1,6 +1,6 @@
 "use client";
 
-import { ContactShadows, useTexture } from "@react-three/drei";
+import { useTexture } from "@react-three/drei";
 
 import { RepeatWrapping } from "three";
 

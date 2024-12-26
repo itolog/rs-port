@@ -6,6 +6,7 @@ import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 
 import Floor from "@/components/AppCanvas/components/Ground/components/Floor/Floor";
+import JsLogo from "@/components/AppCanvas/components/JsLogo/JsLogo";
 
 const Ground = () => {
   const floorRef = useRef<THREE.Group>(null);
@@ -26,6 +27,7 @@ const Ground = () => {
     <group ref={floorRef}>
       <ContactShadows opacity={0.5} scale={[30, 30]} color="#9c8e66" />
       <Floor />
+      <JsLogo />
     </group>
   );
 };

@@ -13,8 +13,8 @@ import { camera as cameraConfig } from "@/config/canvas";
 import Avatar from "@/components/AppCanvas/components/Avatar/Avatar";
 import Disk from "@/components/AppCanvas/components/Disk/Disk";
 import Ground from "@/components/AppCanvas/components/Ground/Ground";
-
-// import Nintendo from "@/components/AppCanvas/components/Nintendo/Nintendo";
+import ProjectsSection from "@/components/AppCanvas/components/sections/ProjectsSection/ProjectsSection";
+import SkillsSection from "@/components/AppCanvas/components/sections/SkillsSection/SkillsSection";
 
 import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
@@ -93,21 +93,14 @@ const CanvasScene = () => {
           ref={skillsRef}
           position-x={isMobile ? SECTIONS_DISTANCE : 0}
           position-z={isMobile ? -4 : SECTIONS_DISTANCE}>
-          {/* <Nintendo /> */}
-          <mesh>
-            <boxGeometry />
-            <meshStandardMaterial color={"#121bb7"} />
-          </mesh>
+          <SkillsSection />
         </group>
         {/* projects */}
         <group
           ref={progRef}
           position-x={isMobile ? 2 * SECTIONS_DISTANCE : 0}
           position-z={isMobile ? -3 : 2 * SECTIONS_DISTANCE}>
-          <mesh>
-            <boxGeometry />
-            <meshStandardMaterial color={"#8f1d1d"} />
-          </mesh>
+          <ProjectsSection />
         </group>
         {/* contact */}
         <group
