@@ -25,8 +25,6 @@ const Floor = () => {
 
   return (
     <mesh position-y={-1} rotation-x={-Math.PI / 2}>
-      <ContactShadows opacity={0.5} scale={[30, 30]} color="#9c8e66" />
-
       <planeGeometry args={[100, 100]} />
       <meshStandardMaterial
         roughness={0.5}

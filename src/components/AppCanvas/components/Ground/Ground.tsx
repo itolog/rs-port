@@ -1,4 +1,4 @@
-import { useScroll } from "@react-three/drei";
+import { ContactShadows, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useRef } from "react";
 
@@ -24,6 +24,7 @@ const Ground = () => {
 
   return (
     <group ref={floorRef}>
+      <ContactShadows opacity={0.5} scale={[30, 30]} color="#9c8e66" />
       <Floor />
     </group>
   );

@@ -173,3 +173,4 @@ export default Avatar;
 useGLTF.preload(models.avatarModelUrl);
 useFBX.preload(models.avatarIdlelUrl);
 useFBX.preload(models.avatarWalkinglUrl);
+useFBX.preload(models.avatarHelllolUrl);

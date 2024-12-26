@@ -13,3 +13,16 @@ export const portfolio = {
     [pages.CONTACT]: pages.CONTACT,
   },
 };
+
+export const skills = [
+  "react",
+  "next.js",
+  "redux",
+  "vue",
+  "typescript",
+  "apollo graphql",
+  "Material UI",
+  "Tailwind CSS",
+  "Scss",
+  "docker",
+] as const;

@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-color: #00f0ff;
   --base-unit: calc(1vw + 1vh);
 }
 
