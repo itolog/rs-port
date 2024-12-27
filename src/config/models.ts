@@ -10,5 +10,6 @@ export const models = {
   reactUrl: "/models/react_logo/scene.gltf",
   htmlUrl: "/models/html5_logo/scene.gltf",
   jsUrl: "/models/javascript_logo/scene.gltf",
+  gamingUrl: "/models/gaming/scene.gltf",
   videoUrl: `https://firebasestorage.googleapis.com/v0/b/yodi-b787d.appspot.com/o/videoplayback.mp4?alt=media&token=${process.env.NEXT_PUBLIC_TOKEN}`,
 };
