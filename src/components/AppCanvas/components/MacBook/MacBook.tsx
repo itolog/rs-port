@@ -91,7 +91,7 @@ const MacBook = (props: Partial<THREE.Group>) => {
         position-z={0.4}
         position-y={3}>
         <planeGeometry args={[8.5, 5.5]} />
-        <meshBasicMaterial colorWrite ref={imageRef} />
+        <meshBasicMaterial ref={imageRef} />
       </mesh>
     </group>
   );
