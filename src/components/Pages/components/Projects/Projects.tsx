@@ -1,8 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-
-import Autoplay from "embla-carousel-autoplay";
+import { useCallback, useEffect, useState } from "react";
 
 import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
 import {
@@ -12,11 +10,36 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { type CarouselApi } from "@/components/ui/carousel";
+
+import useAppStore from "@/store/appStore";
+import createSelectors from "@/store/createSelectors";
 
 import { projectsData } from "./data";
 
 const Projects = () => {
-  const plugin = useRef(Autoplay({ delay: 30000, stopOnInteraction: true }));
+  const setProject = createSelectors(useAppStore).use.setProject();
+  const [api, setApi] = useState<CarouselApi>();
+
+  const handleSlidesInViewOnce = useCallback(
+    (emblaApi: CarouselApi) => {
+      if (emblaApi) {
+        const currentSlide = emblaApi.selectedScrollSnap();
+
+        setProject(projectsData[currentSlide].url);
+        emblaApi.off("slidesInView", handleSlidesInViewOnce);
+      }
+    },
+    [setProject],
+  );
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    api.on("select", handleSlidesInViewOnce);
+  }, [api, handleSlidesInViewOnce]);
 
   return (
     <div className="w-fit h-fit sm:w-full sm:h-full pl-0 sm:pl-16">
@@ -25,15 +48,15 @@ const Projects = () => {
         opts={{
           loop: true,
         }}
-        plugins={[plugin.current]}
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.reset}>
-        <CarouselContent className={"w-[270px] h-[275px] sm:w-[320px] sm:h-[275px]"}>
-          {projectsData.map(({ title, link, image }, index) => (
-            <CarouselItem key={index}>
-              <ProjectCard key={title} link={link} title={title} image={image} />
-            </CarouselItem>
-          ))}
+        setApi={setApi}>
+        <CarouselContent className={"w-[270px] h-fit sm:w-[320px]"}>
+          {projectsData.map((props, index) => {
+            return (
+              <CarouselItem key={index}>
+                <ProjectCard key={index} {...props} />
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

@@ -1,14 +1,27 @@
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useTexture } from "@react-three/drei";
+import React, { useEffect, useRef } from "react";
 
-import { models } from "@/config";
+import { models, portfolio } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 
 import { GLTFResult } from "@/components/AppCanvas/components/MacBook/types";
 
+import useAppStore from "@/store/appStore";
+import createSelectors from "@/store/createSelectors";
+
 const MacBook = (props: Partial<THREE.Group>) => {
   const { isMobile } = useMobile();
   const { nodes, materials } = useGLTF(models.makUrl) as GLTFResult;
+  const project = createSelectors(useAppStore).use.project();
+  const projectTexture = useTexture(project);
+  const imageRef = useRef<THREE.MeshBasicMaterial>(null);
+
+  useEffect(() => {
+    if (!imageRef.current) return;
+    // console.log(projectTexture);
+    imageRef.current.map = projectTexture;
+  }, [projectTexture]);
 
   return (
     <group scale={isMobile ? 0.2 : 0.4} {...props} dispose={null}>
@@ -71,9 +84,22 @@ const MacBook = (props: Partial<THREE.Group>) => {
           position={[0, -0.027, 1.201]}
         />
       </group>
+      <mesh
+        castShadow={true}
+        receiveShadow={true}
+        rotation={[0.014, 0, 0]}
+        position-z={0.4}
+        position-y={3}>
+        <planeGeometry args={[8.5, 5.5]} />
+        <meshBasicMaterial colorWrite ref={imageRef} />
+      </mesh>
     </group>
   );
 };
+
+Object.values(portfolio.project).forEach((project) => {
+  useTexture.preload(project);
+});
 
 useGLTF.preload(models.makUrl);
 export default MacBook;

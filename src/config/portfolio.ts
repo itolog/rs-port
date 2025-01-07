@@ -12,6 +12,10 @@ export const portfolio = {
     [pages.PROJECTS]: pages.PROJECTS,
     [pages.CONTACT]: pages.CONTACT,
   },
+  project: {
+    portfolio: "/images/portfolio.webp",
+    convert: "/images/convert.webp",
+  },
 };
 
 export const skills = [

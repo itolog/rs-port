@@ -12,7 +12,7 @@ const Common = () => {
       <AdaptiveEvents />
 
       <fog attach="fog" args={[COLORS.MAIN, 12, 20]} />
-      <Environment preset="warehouse" environmentIntensity={0.5} />
+      <Environment preset="warehouse" environmentIntensity={0.3} />
     </>
   );
 };
