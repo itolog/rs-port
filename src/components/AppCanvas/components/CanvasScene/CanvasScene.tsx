@@ -5,8 +5,8 @@ import { useRef } from "react";
 
 import { COLORS, portfolio } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
+import { ThreeGroupRef } from "@/types";
 import gsap from "gsap";
-import * as THREE from "three";
 
 import { camera as cameraConfig } from "@/config/canvas";
 
@@ -24,10 +24,10 @@ const SECTIONS_DISTANCE = 10;
 const CanvasScene = () => {
   const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
   const camera = useThree((state) => state.camera);
-  const skillsRef = useRef<THREE.Group>(null);
-  const progRef = useRef<THREE.Group>(null);
-  const contactsRef = useRef<THREE.Group>(null);
-  const sceneContainer = useRef<THREE.Group>(null);
+  const skillsRef = useRef<ThreeGroupRef>(undefined);
+  const progRef = useRef<ThreeGroupRef>(undefined);
+  const contactsRef = useRef<ThreeGroupRef>(undefined);
+  const sceneContainer = useRef<ThreeGroupRef>(undefined);
 
   const { isMobile } = useMobile();
 

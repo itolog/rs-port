@@ -1,13 +1,12 @@
 "use client";
 
-import { memo } from "react";
-
 import { pages } from "@/constants";
 import cl from "clsx";
 
 import { skills } from "@/config/portfolio";
 
-import SkillCard from "@/components/SkillCard/SkillCard";
+import SkillCard from "@/components/Cards/SkillCard/SkillCard";
+import Projects from "@/components/Pages/components/Projects/Projects";
 
 import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
@@ -26,10 +25,12 @@ const Pages = () => {
           return <SkillCard key={skill} skill={skill} />;
         })}
       </section>
-      <section className={cl(pages.PROJECTS, commonStyle)} />
+      <section className={cl("flex justify-center w-full", commonStyle)}>
+        <Projects />
+      </section>
       <section className={cl(pages.CONTACT, commonStyle)} />
     </>
   );
 };
 
-export default memo(Pages);
+export default Pages;

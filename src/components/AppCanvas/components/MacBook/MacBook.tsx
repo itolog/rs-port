@@ -1,15 +1,17 @@
 import { useGLTF } from "@react-three/drei";
 
 import { models } from "@/config";
+import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 
 import { GLTFResult } from "@/components/AppCanvas/components/MacBook/types";
 
 const MacBook = (props: Partial<THREE.Group>) => {
+  const { isMobile } = useMobile();
   const { nodes, materials } = useGLTF(models.makUrl) as GLTFResult;
 
   return (
-    <group scale={0.4} {...props} dispose={null}>
+    <group scale={isMobile ? 0.2 : 0.4} {...props} dispose={null}>
       <group name="Scene">
         <group name="screenflip" position={[0.002, -0.038, 0.414]} rotation={[0.014, 0, 0]}>
           <group name="screen" position={[0, 2.965, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
