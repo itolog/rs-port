@@ -19,7 +19,7 @@ const MacBook = (props: Partial<THREE.Group>) => {
 
   useEffect(() => {
     if (!imageRef.current) return;
-    // console.log(projectTexture);
+
     imageRef.current.map = projectTexture;
   }, [projectTexture]);
 
@@ -91,7 +91,7 @@ const MacBook = (props: Partial<THREE.Group>) => {
         position-z={0.4}
         position-y={3}>
         <planeGeometry args={[8.5, 5.5]} />
-        <meshBasicMaterial ref={imageRef} />
+        <meshStandardMaterial ref={imageRef} />
       </mesh>
     </group>
   );

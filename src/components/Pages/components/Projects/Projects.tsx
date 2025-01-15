@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
 import {
@@ -20,6 +20,8 @@ import { projectsData } from "./data";
 const Projects = () => {
   const setProject = createSelectors(useAppStore).use.setProject();
   const [api, setApi] = useState<CarouselApi>();
+
+  const ref = useRef<HTMLDivElement>(null);
 
   const handleSlidesInViewOnce = useCallback(
     (emblaApi: CarouselApi) => {
@@ -44,6 +46,7 @@ const Projects = () => {
   return (
     <div className="w-fit h-fit sm:w-full sm:h-full pl-0 sm:pl-16">
       <Carousel
+        ref={ref}
         className="max-w-xs"
         opts={{
           loop: true,
