@@ -9,7 +9,7 @@ import { animations } from "@/constants";
 import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 
-import { GLTFResult } from "@/components/AppCanvas/components/Avatar/types";
+import { GLTFResult } from "@/components/AppCanvas/models/Avatar/types";
 
 import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";

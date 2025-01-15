@@ -1,6 +1,6 @@
 import { useMobile } from "@/hooks/useMobile";
 
-import MacBook from "@/components/AppCanvas/components/MacBook/MacBook";
+import MacBook from "@/components/AppCanvas/models/MacBook/MacBook";
 
 const ProjectsSection = () => {
   const { isMobile } = useMobile();

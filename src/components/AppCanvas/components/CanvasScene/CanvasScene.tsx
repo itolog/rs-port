@@ -10,11 +10,12 @@ import gsap from "gsap";
 
 import { camera as cameraConfig } from "@/config/canvas";
 
-import Avatar from "@/components/AppCanvas/components/Avatar/Avatar";
-import Disk from "@/components/AppCanvas/components/Disk/Disk";
 import Ground from "@/components/AppCanvas/components/Ground/Ground";
+import ContactsSection from "@/components/AppCanvas/components/sections/ContactsSection/ContactsSection";
 import ProjectsSection from "@/components/AppCanvas/components/sections/ProjectsSection/ProjectsSection";
 import SkillsSection from "@/components/AppCanvas/components/sections/SkillsSection/SkillsSection";
+import Avatar from "@/components/AppCanvas/models/Avatar/Avatar";
+import Disk from "@/components/AppCanvas/models/Disk/Disk";
 
 import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
@@ -105,12 +106,10 @@ const CanvasScene = () => {
         {/* contact */}
         <group
           ref={contactsRef}
+          position-y={2}
           position-x={isMobile ? 3 * SECTIONS_DISTANCE : 0}
           position-z={isMobile ? -4 : 3 * SECTIONS_DISTANCE}>
-          <mesh>
-            <boxGeometry />
-            <meshStandardMaterial color={"#3ecc55"} />
-          </mesh>
+          <ContactsSection />
         </group>
       </group>
     </>

@@ -6,7 +6,7 @@ import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 
 import Floor from "@/components/AppCanvas/components/Ground/components/Floor/Floor";
-import JsLogo from "@/components/AppCanvas/components/JsLogo/JsLogo";
+import JsLogo from "@/components/AppCanvas/models/JsLogo/JsLogo";
 
 const Ground = () => {
   const floorRef = useRef<THREE.Group>(null);

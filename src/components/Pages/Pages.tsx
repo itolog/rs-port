@@ -20,12 +20,12 @@ const Pages = () => {
   return (
     <>
       <section className={cl(pages.HOME, commonStyle)} />
-      <section className={cl("flex gap-2 items-end flex-col", commonStyle)}>
+      <section className={cl("flex gap-2 items-end flex-col", pages.SKILLS, commonStyle)}>
         {skills.map((skill) => {
           return <SkillCard key={skill} skill={skill} />;
         })}
       </section>
-      <section className={cl("flex justify-center w-full", commonStyle)}>
+      <section className={cl("flex justify-center w-full", pages.PROJECTS, commonStyle)}>
         <Projects />
       </section>
       <section className={cl(pages.CONTACT, commonStyle)} />

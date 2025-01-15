@@ -1,7 +1,7 @@
 import React from "react";
 
-import HtmlLogo from "@/components/AppCanvas/components/HtmlLogo/HtmlLogo";
-import ReactLogo from "@/components/AppCanvas/components/ReactLogo/ReactLogo";
+import HtmlLogo from "@/components/AppCanvas/models/HtmlLogo/HtmlLogo";
+import ReactLogo from "@/components/AppCanvas/models/ReactLogo/ReactLogo";
 
 const SkillsSection = () => {
   return (
