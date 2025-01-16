@@ -17,7 +17,6 @@ const MouseIcon = () => {
         start: "top top",
         end: "+=500",
         scrub: 1,
-        markers: true,
         scroller: scrollData.el,
       },
     });
