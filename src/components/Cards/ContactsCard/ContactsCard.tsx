@@ -17,7 +17,14 @@ const ContactsCard: FC<ContactsCardProps> = ({ ref }) => {
   return (
     <div ref={ref} className={styles.ContactsCard}>
       <div className={styles.Container}>
-        <Image className={styles.Avatar} src={Ava} alt={portfolio.title.label} />
+        <Image
+          height={250}
+          width={266}
+          placeholder="blur"
+          className={styles.Avatar}
+          src={Ava}
+          alt={portfolio.title.label}
+        />
         <h2 className={styles.Title}>{portfolio.title.label}</h2>
         <p className={styles.Description}>{portfolio.title.description}</p>
 

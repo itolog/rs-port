@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 
+import { GoogleAnalytics } from "@next/third-parties/google";
 import cl from "clsx";
 import type { Metadata } from "next";
 
@@ -23,6 +24,9 @@ export default function RootLayout({
       <body className={bodyClass}>
         <main className={"w-full h-full"}>{children}</main>
       </body>
+      {process.env.NEXT_PUBLIC_ANALYTICS && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_ANALYTICS} />
+      )}
     </html>
   );
 }
