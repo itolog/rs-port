@@ -1,8 +1,34 @@
+import { useGSAP } from "@gsap/react";
+import { useScroll } from "@react-three/drei";
+import { useRef } from "react";
+
+import gsap from "gsap";
+
 import styles from "./styles.module.css";
 
 const MouseIcon = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const scrollData = useScroll();
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: document.querySelector(".home"),
+        start: "top top",
+        end: "+=500",
+        scrub: 1,
+        markers: true,
+        scroller: scrollData.el,
+      },
+    });
+
+    tl.to(ref.current, {
+      opacity: 0,
+    });
+  });
+
   return (
-    <div className={styles.MouseIcon}>
+    <div ref={ref} className={styles.MouseIcon}>
       <svg
         width="19"
         height="30"
@@ -10,8 +36,8 @@ const MouseIcon = () => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M16.875 20.625V9.375C16.875 7.38588 16.0848 5.47822 14.6783 4.0717C13.2718 2.66518 11.3641 1.875 9.375 1.875C7.38588 1.875 5.47822 2.66518 4.0717 4.0717C2.66518 5.47822 1.875 7.38588 1.875 9.375V20.625C1.875 22.6141 2.66518 24.5218 4.0717 25.9283C5.47822 27.3348 7.38588 28.125 9.375 28.125C11.3641 28.125 13.2718 27.3348 14.6783 25.9283C16.0848 24.5218 16.875 22.6141 16.875 20.625ZM9.375 0C6.8886 0 4.50403 0.98772 2.74587 2.74587C0.98772 4.50403 0 6.8886 0 9.375V20.625C0 23.1114 0.98772 25.496 2.74587 27.2541C4.50403 29.0123 6.8886 30 9.375 30C11.8614 30 14.246 29.0123 16.0041 27.2541C17.7623 25.496 18.75 23.1114 18.75 20.625V9.375C18.75 6.8886 17.7623 4.50403 16.0041 2.74587C14.246 0.98772 11.8614 0 9.375 0Z"
           fill="white"
           className="mouse"
