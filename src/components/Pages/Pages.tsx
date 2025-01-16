@@ -20,10 +20,6 @@ const commonStyle = "w-full h-dvh p-5";
 const Pages = () => {
   const mouseRef = useRef<HTMLDivElement>(null);
   const homeRef = useRef<HTMLDivElement>(null);
-  const projRef = useRef<HTMLDivElement>(null);
-  const projCardRef = useRef<HTMLDivElement>(null);
-  const contactsRef = useRef<HTMLDivElement>(null);
-  const contactsCardRef = useRef<HTMLDivElement>(null);
   const scrollData = useScroll();
 
   useGSAP(() => {
@@ -54,19 +50,16 @@ const Pages = () => {
           return <SkillCard key={skill} skill={skill} />;
         })}
       </section>
-      <section
-        ref={projRef}
-        className={cl("flex justify-center w-full", pages.PROJECTS, commonStyle)}>
-        <Projects ref={projCardRef} />
+      <section className={cl("flex justify-center w-full", pages.PROJECTS, commonStyle)}>
+        <Projects />
       </section>
       <section
-        ref={contactsRef}
         className={cl(
           pages.CONTACT,
           "flex items-center justify-center md:justify-start",
           commonStyle,
         )}>
-        <ContactsCard ref={contactsCardRef} />
+        <ContactsCard />
       </section>
     </>
   );

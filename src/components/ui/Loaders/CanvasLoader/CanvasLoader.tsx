@@ -11,7 +11,7 @@ const CanvasLoader = () => {
 
   const setLoading = createSelectors(useAppStore).use.setLoading();
 
-  const rootClass = cl("fixed flex justify-center items-center w-screen h-screen", {
+  const rootClass = cl("fixed flex justify-center items-center w-screen h-screen loading z-50", {
     "opacity-0": !active ? 1 : 0,
     hidden: !active ? 1 : 0,
   });
