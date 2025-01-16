@@ -9,7 +9,7 @@ const ContactsSection = () => {
   return (
     <group>
       <Float speed={2} rotationIntensity={1} floatIntensity={1} floatingRange={[1, 1.5]}>
-        <mesh ref={sphere} scale={0.7} position-x={-3}>
+        <mesh ref={sphere} scale={0.7} position-x={3}>
           <sphereGeometry />
           <MeshDistortMaterial
             color={"#E8B059"}

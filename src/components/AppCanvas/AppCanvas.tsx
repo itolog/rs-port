@@ -32,7 +32,7 @@ const AppCanvas = () => {
             </Suspense>
           </group>
 
-          <Scroll html style={{ width: "100%", height: "100dvh" }}>
+          <Scroll html style={{ width: "100%" }}>
             <Pages />
           </Scroll>
         </ScrollControls>

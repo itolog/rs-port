@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { FC, Ref, useCallback, useEffect, useState } from "react";
 
 import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
 import {
@@ -17,11 +17,13 @@ import createSelectors from "@/store/createSelectors";
 
 import { projectsData } from "./data";
 
-const Projects = () => {
+interface ProjectsProps {
+  ref?: Ref<HTMLDivElement>;
+}
+
+const Projects: FC<ProjectsProps> = ({ ref }) => {
   const setProject = createSelectors(useAppStore).use.setProject();
   const [api, setApi] = useState<CarouselApi>();
-
-  const ref = useRef<HTMLDivElement>(null);
 
   const handleSlidesInViewOnce = useCallback(
     (emblaApi: CarouselApi) => {

@@ -1,31 +1,12 @@
-import { useGSAP } from "@gsap/react";
-import { useScroll } from "@react-three/drei";
-import { useRef } from "react";
-
-import gsap from "gsap";
+import { FC, Ref } from "react";
 
 import styles from "./styles.module.css";
 
-const MouseIcon = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const scrollData = useScroll();
+interface MouseIconProps {
+  ref?: Ref<HTMLDivElement>;
+}
 
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: document.querySelector(".home"),
-        start: "top top",
-        end: "+=500",
-        scrub: 1,
-        scroller: scrollData.el,
-      },
-    });
-
-    tl.to(ref.current, {
-      opacity: 0,
-    });
-  });
-
+const MouseIcon: FC<MouseIconProps> = ({ ref }) => {
   return (
     <div ref={ref} className={styles.MouseIcon}>
       <svg

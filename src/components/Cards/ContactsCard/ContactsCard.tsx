@@ -1,3 +1,5 @@
+import { FC, Ref } from "react";
+
 import { portfolio } from "@/config";
 import Image from "next/image";
 
@@ -7,9 +9,13 @@ import SvgIcons from "@/components/ui/SvgIcon/SvgIcon";
 import Ava from "../../../../public/images/ava.jpeg";
 import styles from "./styles.module.css";
 
-const ContactsCard = () => {
+interface ContactsCardProps {
+  ref?: Ref<HTMLDivElement>;
+}
+
+const ContactsCard: FC<ContactsCardProps> = ({ ref }) => {
   return (
-    <div className={styles.ContactsCard}>
+    <div ref={ref} className={styles.ContactsCard}>
       <div className={styles.Container}>
         <Image className={styles.Avatar} src={Ava} alt={portfolio.title.label} />
         <h2 className={styles.Title}>{portfolio.title.label}</h2>
@@ -20,7 +26,13 @@ const ContactsCard = () => {
           {contactsData.map(({ link, image }) => {
             return (
               <a key={image} href={link} target={"_blank"}>
-                <SvgIcons name={image} size={"40px"} />
+                <SvgIcons
+                  classes={{
+                    root: styles.Link,
+                  }}
+                  name={image}
+                  size={"40px"}
+                />
               </a>
             );
           })}

@@ -25,6 +25,9 @@
 .Avatar {
     max-height: 250px;
 }
+.Creator {
+    padding-top: 0.42em;
+}
 
 .ContactsCard .Container .Avatar {
     border-radius: 0.5rem;
@@ -70,26 +73,11 @@
     height: 2rem;
     object-fit: cover;
 }
-.ContactsCard ::before {
-    position: fixed;
-    content: "";
-    box-shadow: 0 0 100px 40px #ffffff08;
-    top: -10%;
-    left: -100%;
-    transform: rotate(-45deg);
-    height: 60rem;
-    transition: 0.7s all;
-}
-.ContactsCard:hover {
-    border: 1px solid #ffffff44;
-    box-shadow: 0 7px 50px 10px #000000aa;
-    transform: scale(1.015);
+
+.Link:hover {
+    transform: scale(1.2);
+    transition: .5s;
     filter: brightness(1.3);
-}
-.ContactsCard:hover ::before {
-    filter: brightness(0.5);
-    top: -100%;
-    left: 200%;
 }
 
 .Title {
