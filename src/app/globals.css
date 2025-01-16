@@ -4,6 +4,7 @@
 
 :root {
   --primary-color: #00f0ff;
+  --secondary-color: #ee83e5;
   --base-unit: calc(1vw + 1vh);
 }
 

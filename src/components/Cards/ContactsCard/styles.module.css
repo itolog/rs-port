@@ -1,0 +1,98 @@
+.ContactsCard {
+    user-select: none;
+    max-width: 300px;
+    width: fit-content;
+    border: 1px solid #ffffff22;
+    background: linear-gradient(0deg, #282c34 0%, rgba(17, 0, 32, 0.5) 100%);
+    box-shadow: 0 7px 20px 5px #00000088;
+    border-radius: 0.7rem;
+    backdrop-filter: blur(7px);
+    overflow: hidden;
+    transition: 0.5s all;
+}
+.ContactsCard hr {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #88888855;
+}
+
+.ContactsCard .Container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.Avatar {
+    max-height: 250px;
+}
+
+.ContactsCard .Container .Avatar {
+    border-radius: 0.5rem;
+    max-width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.ContactsCard .Container .Description {
+    margin: 0.5rem 0;
+}
+.ContactsCard .Container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ContactsCard .Container {
+    display: flex;
+    align-items: center;
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.ContactsCard .Container {
+    display: flex;
+    align-items: center;
+}
+.ContactsCard .Container ins {
+    margin: 0.5rem 0.5rem 0.4rem;
+}
+.ContactsCard .Container .Creator {
+    display: flex;
+    align-items: center;
+
+}
+.ContactsCard .Container .Creator ins {
+    text-decoration: none;
+}
+
+.ContactsCard .Container .Creator img {
+    border-radius: 100%;
+    border: 1px solid #ffffff22;
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+}
+.ContactsCard ::before {
+    position: fixed;
+    content: "";
+    box-shadow: 0 0 100px 40px #ffffff08;
+    top: -10%;
+    left: -100%;
+    transform: rotate(-45deg);
+    height: 60rem;
+    transition: 0.7s all;
+}
+.ContactsCard:hover {
+    border: 1px solid #ffffff44;
+    box-shadow: 0 7px 50px 10px #000000aa;
+    transform: scale(1.015);
+    filter: brightness(1.3);
+}
+.ContactsCard:hover ::before {
+    filter: brightness(0.5);
+    top: -100%;
+    left: 200%;
+}
+
+.Title {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}

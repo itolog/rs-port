@@ -1,6 +1,5 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
 import { Scroll, ScrollControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
@@ -16,11 +15,9 @@ import HeroTitle from "@/components/HeroTitle/HeroTitle";
 import Pages from "@/components/Pages/Pages";
 import CanvasLoader from "@/components/ui/Loaders/CanvasLoader/CanvasLoader";
 
-const AppCanvas = () => {
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger, TextPlugin);
-  });
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
+const AppCanvas = () => {
   return (
     <>
       <CanvasLoader />

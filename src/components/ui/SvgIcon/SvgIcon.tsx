@@ -1,11 +1,11 @@
 import { FC } from "react";
 
-import { Skills } from "@/types";
+import { Icons } from "@/types";
 import cl from "clsx";
 
-import { skills } from "@/config/portfolio";
+import { icons } from "@/config/portfolio";
 
-import { icons } from "./icons";
+import { svgIcons } from "./icons";
 import styles from "./svgIcon.module.css";
 
 interface Classes {
@@ -13,7 +13,7 @@ interface Classes {
 }
 
 interface Props {
-  name: Skills;
+  name: Icons;
   color?: string;
   size?: string;
   classes?: Classes;
@@ -22,11 +22,11 @@ interface Props {
 const SvgIcons: FC<Props> = ({ name, color = "white", classes, size = "100%" }) => {
   const containerClass = cl(styles.container, classes?.root);
 
-  if (!skills.includes(name)) return null;
+  if (!icons.includes(name)) return null;
 
   return (
     <div style={{ color, width: size, height: size }} className={containerClass}>
-      {icons[name]}
+      {svgIcons[name]}
     </div>
   );
 };

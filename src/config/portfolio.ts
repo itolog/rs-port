@@ -29,4 +29,8 @@ export const skills = [
   "Tailwind CSS",
   "Scss",
   "docker",
-] as const;
+];
+
+export const contacts = ["git", "linkedin"] as const;
+
+export const icons = [...skills, ...contacts] as const;
