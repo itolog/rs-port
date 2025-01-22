@@ -24,18 +24,17 @@ const AppCanvas = () => {
       <HeroTitle />
       <Canvas shadows camera={{ position: [0, 0.5, 5] }}>
         <Common />
-
-        <ScrollControls pages={portfolio.sections.length} damping={0.1} maxSpeed={0.3}>
-          <group position-y={-1}>
-            <Suspense>
+        <Suspense>
+          <ScrollControls pages={portfolio.sections.length} damping={0.1} maxSpeed={0.3}>
+            <group position-y={-1}>
               <CanvasScene />
-            </Suspense>
-          </group>
+            </group>
 
-          <Scroll html style={{ width: "100%" }}>
-            <Pages />
-          </Scroll>
-        </ScrollControls>
+            <Scroll html style={{ width: "100%" }}>
+              <Pages />
+            </Scroll>
+          </ScrollControls>
+        </Suspense>
       </Canvas>
     </>
   );
