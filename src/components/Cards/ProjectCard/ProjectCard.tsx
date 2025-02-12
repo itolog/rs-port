@@ -11,7 +11,7 @@ import SvgIcons from "@/components/ui/SvgIcon/SvgIcon";
 
 const ProjectCard: FC<Project> = ({ title, image, link, description, technologies }) => {
   return (
-    <div className="flex flex-col w-[250px] h-[280px] sm:w-[320px] border rounded-lg shadow bg-slate-800 border-slate-700">
+    <div className="flex flex-col w-[250px] h-[280px] sm:w-[320px] border rounded-lg shadow-sm bg-slate-800 border-slate-700">
       <div className="relative w-full h-[120px]">
         <Image
           className="rounded-t-lg"
