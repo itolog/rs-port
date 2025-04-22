@@ -15,7 +15,7 @@ type GLTFResult = GLTF & {
 };
 
 const JsLogo = () => {
-  const { nodes, materials } = useGLTF(models.jsUrl) as GLTFResult;
+  const { nodes, materials } = useGLTF(models.jsUrl) as unknown as GLTFResult;
   const { isMobile } = useMobile();
 
   return (

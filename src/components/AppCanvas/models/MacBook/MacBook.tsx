@@ -15,7 +15,7 @@ const receiveShadow = false;
 
 const MacBook = (props: Partial<THREE.Group>) => {
   const { isMobile } = useMobile();
-  const { nodes, materials } = useGLTF(models.makUrl) as GLTFResult;
+  const { nodes, materials } = useGLTF(models.makUrl) as unknown as GLTFResult;
   const project = createSelectors(useAppStore).use.project();
   const projectTexture = useTexture(project);
   const imageRef = useRef<THREE.MeshBasicMaterial>(null);

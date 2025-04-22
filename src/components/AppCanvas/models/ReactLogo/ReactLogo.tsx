@@ -16,7 +16,7 @@ type GLTFResult = GLTF & {
 };
 
 const ReactLogo = () => {
-  const { nodes, materials } = useGLTF(models.reactUrl) as GLTFResult;
+  const { nodes, materials } = useGLTF(models.reactUrl) as unknown as GLTFResult;
   const ref = useRef<THREE.Group | null>(null);
   const scrollState = useScroll();
 

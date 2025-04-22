@@ -15,7 +15,7 @@ type GLTFResult = GLTF & {
 };
 
 const Disk = (props: Partial<THREE.Group>) => {
-  const { nodes, materials } = useGLTF(models.diskUrl) as GLTFResult;
+  const { nodes, materials } = useGLTF(models.diskUrl) as unknown as GLTFResult;
 
   const { isMobile } = useMobile();
 
