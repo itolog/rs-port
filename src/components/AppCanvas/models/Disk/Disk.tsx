@@ -1,21 +1,23 @@
 import { useGLTF } from "@react-three/drei";
+import { ObjectMap } from "@react-three/fiber";
 
 import { models } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 
-type GLTFResult = GLTF & {
-  nodes: {
-    Object_4: THREE.Mesh;
+type GLTFResult = GLTF &
+  ObjectMap & {
+    nodes: {
+      Object_4: THREE.Mesh;
+    };
+    materials: {
+      ["YellowMetallic.1592"]: THREE.MeshStandardMaterial;
+    };
   };
-  materials: {
-    ["YellowMetallic.1592"]: THREE.MeshStandardMaterial;
-  };
-};
 
 const Disk = (props: Partial<THREE.Group>) => {
-  const { nodes, materials } = useGLTF(models.diskUrl) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(models.diskUrl) as GLTFResult;
 
   const { isMobile } = useMobile();
 

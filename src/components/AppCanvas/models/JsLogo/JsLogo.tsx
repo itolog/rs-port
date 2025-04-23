@@ -1,21 +1,23 @@
 import { useGLTF } from "@react-three/drei";
+import { ObjectMap } from "@react-three/fiber";
 
 import { models } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 
-type GLTFResult = GLTF & {
-  nodes: {
-    Object_2: THREE.Mesh;
+type GLTFResult = GLTF &
+  ObjectMap & {
+    nodes: {
+      Object_2: THREE.Mesh;
+    };
+    materials: {
+      mat_3220964: THREE.MeshStandardMaterial;
+    };
   };
-  materials: {
-    mat_3220964: THREE.MeshStandardMaterial;
-  };
-};
 
 const JsLogo = () => {
-  const { nodes, materials } = useGLTF(models.jsUrl) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(models.jsUrl) as GLTFResult;
   const { isMobile } = useMobile();
 
   return (

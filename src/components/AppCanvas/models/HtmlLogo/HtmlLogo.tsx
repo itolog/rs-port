@@ -1,27 +1,29 @@
 import { Float, useGLTF } from "@react-three/drei";
+import { ObjectMap } from "@react-three/fiber";
 
 import { models } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 
-type GLTFResult = GLTF & {
-  nodes: {
-    Object_4: THREE.Mesh;
-    Object_5: THREE.Mesh;
-    Object_7: THREE.Mesh;
-    Object_9: THREE.Mesh;
+type GLTFResult = GLTF &
+  ObjectMap & {
+    nodes: {
+      Object_4: THREE.Mesh;
+      Object_5: THREE.Mesh;
+      Object_7: THREE.Mesh;
+      Object_9: THREE.Mesh;
+    };
+    materials: {
+      ["SVGMat.001"]: THREE.MeshStandardMaterial;
+      ["Material.001"]: THREE.MeshStandardMaterial;
+      ["SVGMat.002"]: THREE.MeshStandardMaterial;
+      ["SVGMat.004"]: THREE.MeshStandardMaterial;
+    };
   };
-  materials: {
-    ["SVGMat.001"]: THREE.MeshStandardMaterial;
-    ["Material.001"]: THREE.MeshStandardMaterial;
-    ["SVGMat.002"]: THREE.MeshStandardMaterial;
-    ["SVGMat.004"]: THREE.MeshStandardMaterial;
-  };
-};
 
 const HtmlLogo = () => {
-  const { nodes, materials } = useGLTF(models.htmlUrl) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(models.htmlUrl) as GLTFResult;
   const { isMobile } = useMobile();
 
   return (

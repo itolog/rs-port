@@ -1,22 +1,23 @@
 import { useGLTF, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { ObjectMap, useFrame } from "@react-three/fiber";
 import React, { useRef } from "react";
 
 import { models } from "@/config";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 
-type GLTFResult = GLTF & {
-  nodes: {
-    ["React-Logo_Material002_0"]: THREE.Mesh;
+type GLTFResult = GLTF &
+  ObjectMap & {
+    nodes: {
+      ["React-Logo_Material002_0"]: THREE.Mesh;
+    };
+    materials: {
+      ["Material.002"]: THREE.MeshStandardMaterial;
+    };
   };
-  materials: {
-    ["Material.002"]: THREE.MeshStandardMaterial;
-  };
-};
 
 const ReactLogo = () => {
-  const { nodes, materials } = useGLTF(models.reactUrl) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(models.reactUrl) as GLTFResult;
   const ref = useRef<THREE.Group | null>(null);
   const scrollState = useScroll();
 

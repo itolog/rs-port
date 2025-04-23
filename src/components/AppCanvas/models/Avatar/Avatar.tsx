@@ -19,7 +19,7 @@ const Avatar = (props: Partial<THREE.Group>) => {
   const lastScroll = useRef(0);
 
   const scrollState = useScroll();
-  const { nodes, materials } = useGLTF(models.avatarModelUrl) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
   const { animations: walkAnim } = useFBX(models.avatarWalkinglUrl);
   const { animations: helloAnim } = useFBX(models.avatarHelllolUrl);
