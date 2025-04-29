@@ -6,6 +6,8 @@ interface Technologies {
   size: string;
 }
 
+type ProjectStatus = "in development" | "production";
+
 export interface Project {
   title: string;
   image: string | StaticImageData;
@@ -13,4 +15,5 @@ export interface Project {
   url: string;
   description: string;
   technologies: Technologies[];
+  status: ProjectStatus;
 }

@@ -45,7 +45,7 @@ export const svgIcons: Record<Skills, ReactElement> = {
   ),
   "next.js": (
     <svg
-      fill="#000000"
+      fill="white"
       width="800px"
       height="800px"
       viewBox="0 0 32 32"
