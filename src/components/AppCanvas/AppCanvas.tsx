@@ -20,22 +20,27 @@ gsap.registerPlugin(ScrollTrigger, TextPlugin);
 const AppCanvas = () => {
   return (
     <>
-      <CanvasLoader />
-      <HeroTitle />
-      <Canvas shadows camera={{ position: [0, 0.5, 5] }}>
+      {/* <CanvasLoader /> */}
+      {/* <HeroTitle /> */}
+      <Canvas
+        shadows
+        className={"inset-0 h-full"}
+        style={{ position: "fixed" }}
+        camera={{ position: [0, 0.5, 5] }}>
         <Common />
         <Suspense>
-          <ScrollControls pages={portfolio.sections.length} damping={0.1} maxSpeed={0.3}>
-            <group position-y={-1}>
-              <CanvasScene />
-            </group>
+          {/* <ScrollControls pages={portfolio.sections.length} damping={0.1} maxSpeed={0.3}> */}
+          <group position-y={-1}>
+            <CanvasScene />
+          </group>
 
-            <Scroll html style={{ width: "100%" }}>
-              <Pages />
-            </Scroll>
-          </ScrollControls>
+          {/*   <Scroll html style={{ width: "100%" }}> */}
+
+          {/*   </Scroll> */}
+          {/* </ScrollControls> */}
         </Suspense>
       </Canvas>
+      <Pages />
     </>
   );
 };

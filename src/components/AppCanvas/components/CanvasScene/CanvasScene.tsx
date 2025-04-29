@@ -32,22 +32,22 @@ const CanvasScene = () => {
 
   const { isMobile } = useMobile();
 
-  const scrollData = useScroll();
-  useFrame(() => {
-    if (!sceneContainer.current) return;
-
-    if (isMobile) {
-      sceneContainer.current.position.x =
-        -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
-      sceneContainer.current.position.z = 0;
-    } else {
-      sceneContainer.current.position.z =
-        -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
-      sceneContainer.current.position.x = 0;
-    }
-
-    setCurrentSection(portfolio.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]);
-  });
+  // const scrollData = useScroll();
+  // useFrame(() => {
+  //   if (!sceneContainer.current) return;
+  //
+  //   if (isMobile) {
+  //     sceneContainer.current.position.x =
+  //       -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+  //     sceneContainer.current.position.z = 0;
+  //   } else {
+  //     sceneContainer.current.position.z =
+  //       -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+  //     sceneContainer.current.position.x = 0;
+  //   }
+  //
+  //   setCurrentSection(portfolio.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]);
+  // });
 
   useGSAP(() => {
     if (!skillsRef?.current) return;

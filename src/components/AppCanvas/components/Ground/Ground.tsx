@@ -1,4 +1,4 @@
-import { ContactShadows, useScroll } from "@react-three/drei";
+import { ContactShadows } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useRef } from "react";
 
@@ -10,18 +10,18 @@ import JsLogo from "@/components/AppCanvas/models/JsLogo/JsLogo";
 
 const Ground = () => {
   const floorRef = useRef<THREE.Group>(null);
-  const scrollData = useScroll();
+  // const scrollData = useScroll();
   const { isMobile } = useMobile();
 
-  useFrame(() => {
-    if (!floorRef.current) return;
-
-    if (isMobile) {
-      floorRef.current.position.x = -scrollData.offset * (scrollData.pages - 1);
-    } else {
-      floorRef.current.position.z = -scrollData.offset * (scrollData.pages - 1);
-    }
-  });
+  // useFrame(() => {
+  //   if (!floorRef.current) return;
+  //
+  //   if (isMobile) {
+  //     floorRef.current.position.x = -scrollData.offset * (scrollData.pages - 1);
+  //   } else {
+  //     floorRef.current.position.z = -scrollData.offset * (scrollData.pages - 1);
+  //   }
+  // });
 
   return (
     <group ref={floorRef}>

@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={"w-full h-full"}>
       <body className={bodyClass}>
-        <main className={"w-full h-full"}>{children}</main>
+        <main className={"main relative w-full h-screen"}>{children}</main>
       </body>
       {process.env.NEXT_PUBLIC_ANALYTICS && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_ANALYTICS} />

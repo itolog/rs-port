@@ -1,5 +1,6 @@
 "use client";
 
+import { useGSAP } from "@gsap/react";
 import { useAnimations, useFBX, useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
@@ -7,6 +8,8 @@ import { useEffect, useRef } from "react";
 import { models } from "@/config";
 import { animations } from "@/constants";
 import { useMobile } from "@/hooks/useMobile";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
 
 import { GLTFResult } from "@/components/AppCanvas/models/Avatar/types";
@@ -58,30 +61,51 @@ const Avatar = (props: Partial<THREE.Group>) => {
     };
   }, [actions, animation]);
 
-  useFrame(() => {
-    const scrollDelta = scrollState.offset - lastScroll.current;
-    let rotationTarget = 0;
-    if (Math.abs(scrollDelta) > 0.0000001) {
-      setAnimation(animations.WALKING);
-      if (scrollDelta > 0) {
-        rotationTarget = isMobile ? Math.PI / 2 : 0;
-      } else {
-        rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
-      }
-    } else {
-      setAnimation(animations.IDLE);
-    }
+  useGSAP(() => {
+    ScrollTrigger.create({
+      trigger: ".pages",
+      start: "top top",
 
-    if (group?.current?.rotation) {
-      group.current.rotation.y = THREE.MathUtils.lerp(
-        group.current.rotation.y,
-        rotationTarget,
-        0.1,
-      );
-    }
-
-    lastScroll.current = scrollState.offset;
+      end: "bottom bottom",
+      onToggle: (self) => console.log("toggled, isActive:", self.isActive),
+      onUpdate: (self) => {
+        console.log(self);
+        // console.log(
+        //   "progress:",
+        //   self.progress.toFixed(3),
+        //   "direction:",
+        //   self.direction,
+        //   "velocity",
+        //   self.getVelocity(),
+        // );
+      },
+    });
   });
+  //
+  // useFrame(() => {
+  //   const scrollDelta = scrollState.offset - lastScroll.current;
+  //   let rotationTarget = 0;
+  //   if (Math.abs(scrollDelta) > 0.0000001) {
+  //     setAnimation(animations.WALKING);
+  //     if (scrollDelta > 0) {
+  //       rotationTarget = isMobile ? Math.PI / 2 : 0;
+  //     } else {
+  //       rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
+  //     }
+  //   } else {
+  //     setAnimation(animations.IDLE);
+  //   }
+  //
+  //   if (group?.current?.rotation) {
+  //     group.current.rotation.y = THREE.MathUtils.lerp(
+  //       group.current.rotation.y,
+  //       rotationTarget,
+  //       0.1,
+  //     );
+  //   }
+  //
+  //   lastScroll.current = scrollState.offset;
+  // });
 
   return (
     <group
