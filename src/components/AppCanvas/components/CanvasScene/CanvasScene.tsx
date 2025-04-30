@@ -16,7 +16,7 @@ import Ground from "@/components/AppCanvas/components/Ground/Ground";
 import ContactsSection from "@/components/AppCanvas/components/sections/ContactsSection/ContactsSection";
 import ProjectsSection from "@/components/AppCanvas/components/sections/ProjectsSection/ProjectsSection";
 import SkillsSection from "@/components/AppCanvas/components/sections/SkillsSection/SkillsSection";
-import Avatar from "@/components/AppCanvas/models/Avatar/Avatar";
+// import Avatar from "@/components/AppCanvas/models/Avatar/Avatar";
 import Disk from "@/components/AppCanvas/models/Disk/Disk";
 
 import useAppStore from "@/store/appStore";
