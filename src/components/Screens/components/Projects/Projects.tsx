@@ -46,7 +46,7 @@ const Projects: FC<ProjectsProps> = ({ ref }) => {
   }, [api, handleSlidesInViewOnce]);
 
   return (
-    <div className="w-fit h-fit sm:w-full sm:h-full pl-0 sm:pl-16">
+    <div className="h-fit w-fit pl-0 sm:h-full sm:w-full sm:pl-16">
       <Carousel
         ref={ref}
         className="max-w-xs"
@@ -54,7 +54,7 @@ const Projects: FC<ProjectsProps> = ({ ref }) => {
           loop: true,
         }}
         setApi={setApi}>
-        <CarouselContent className={"w-[270px] h-fit sm:w-[320px]"}>
+        <CarouselContent className={"h-fit w-[270px] sm:w-[320px]"}>
           {projectsData.map((props, index) => {
             return (
               <CarouselItem key={index}>

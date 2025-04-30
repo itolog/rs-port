@@ -1,5 +1,6 @@
 import { FC } from "react";
 
+import { cn } from "@/lib/utils";
 import { Skills } from "@/types";
 
 import SvgIcons from "@/components/ui/SvgIcon/SvgIcon";
@@ -8,11 +9,14 @@ import styles from "./styles.module.css";
 
 interface RsCardProps {
   skill: Skills;
+  classes?: {
+    root?: string;
+  };
 }
 
-const SkillCard: FC<RsCardProps> = ({ skill }) => {
+const SkillCard: FC<RsCardProps> = ({ skill, classes }) => {
   return (
-    <div className={styles.Card}>
+    <div className={cn(styles.Card, classes?.root)}>
       <div className={styles.Gradient} />
       <div className={styles.Info}>
         <div className={styles.Title}>

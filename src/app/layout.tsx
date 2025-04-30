@@ -21,9 +21,9 @@ export default function RootLayout({
   const bodyClass = cl(doto.className, "relative antialiased w-full h-full bg-slate-900");
 
   return (
-    <html lang="en" className={"w-full h-full"}>
+    <html lang="en">
       <body className={bodyClass}>
-        <main className={"main relative w-full h-screen"}>{children}</main>
+        <main className={"main relative h-screen"}>{children}</main>
       </body>
       {process.env.NEXT_PUBLIC_ANALYTICS && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_ANALYTICS} />

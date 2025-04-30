@@ -1,15 +1,12 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import { useAnimations, useFBX, useGLTF, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
+import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
+import { FC, RefObject, useEffect, useRef } from "react";
 
 import { models } from "@/config";
 import { animations } from "@/constants";
 import { useMobile } from "@/hooks/useMobile";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ThreeGroupRef } from "@/types";
 import * as THREE from "three";
 
 import { GLTFResult } from "@/components/AppCanvas/models/Avatar/types";
@@ -17,11 +14,13 @@ import { GLTFResult } from "@/components/AppCanvas/models/Avatar/types";
 import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
 
-const Avatar = (props: Partial<THREE.Group>) => {
-  const group = useRef<THREE.Group>(null);
-  const lastScroll = useRef(0);
+interface AvatarProps extends Partial<THREE.Group> {
+  ref: RefObject<ThreeGroupRef>;
+}
 
-  const scrollState = useScroll();
+const Avatar: FC<AvatarProps> = (props) => {
+  const group = useRef<THREE.Group>(null);
+
   const { nodes, materials } = useGLTF(models.avatarModelUrl) as GLTFResult;
   const { animations: idleAnim } = useFBX(models.avatarIdlelUrl);
   const { animations: walkAnim } = useFBX(models.avatarWalkinglUrl);
@@ -34,7 +33,6 @@ const Avatar = (props: Partial<THREE.Group>) => {
   const { actions } = useAnimations([idleAnim[0], walkAnim[0], helloAnim[0]], group);
 
   const animation = createSelectors(useAppStore).use.animation();
-  const setAnimation = createSelectors(useAppStore).use.setAnimation();
 
   const { isMobile } = useMobile();
 
@@ -60,52 +58,6 @@ const Avatar = (props: Partial<THREE.Group>) => {
       actions[animation]?.fadeOut(0.5);
     };
   }, [actions, animation]);
-
-  useGSAP(() => {
-    ScrollTrigger.create({
-      trigger: ".pages",
-      start: "top top",
-
-      end: "bottom bottom",
-      onToggle: (self) => console.log("toggled, isActive:", self.isActive),
-      onUpdate: (self) => {
-        console.log(self);
-        // console.log(
-        //   "progress:",
-        //   self.progress.toFixed(3),
-        //   "direction:",
-        //   self.direction,
-        //   "velocity",
-        //   self.getVelocity(),
-        // );
-      },
-    });
-  });
-  //
-  // useFrame(() => {
-  //   const scrollDelta = scrollState.offset - lastScroll.current;
-  //   let rotationTarget = 0;
-  //   if (Math.abs(scrollDelta) > 0.0000001) {
-  //     setAnimation(animations.WALKING);
-  //     if (scrollDelta > 0) {
-  //       rotationTarget = isMobile ? Math.PI / 2 : 0;
-  //     } else {
-  //       rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
-  //     }
-  //   } else {
-  //     setAnimation(animations.IDLE);
-  //   }
-  //
-  //   if (group?.current?.rotation) {
-  //     group.current.rotation.y = THREE.MathUtils.lerp(
-  //       group.current.rotation.y,
-  //       rotationTarget,
-  //       0.1,
-  //     );
-  //   }
-  //
-  //   lastScroll.current = scrollState.offset;
-  // });
 
   return (
     <group

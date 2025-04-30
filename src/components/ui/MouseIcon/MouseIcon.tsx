@@ -1,14 +1,19 @@
 import { FC, Ref } from "react";
 
+import { cn } from "@/lib/utils";
+
 import styles from "./styles.module.css";
 
 interface MouseIconProps {
   ref?: Ref<HTMLDivElement>;
+  classes?: {
+    root?: string;
+  };
 }
 
-const MouseIcon: FC<MouseIconProps> = ({ ref }) => {
+const MouseIcon: FC<MouseIconProps> = ({ ref, classes }) => {
   return (
-    <div ref={ref} className={styles.MouseIcon}>
+    <div ref={ref} className={cn(styles.MouseIcon, classes?.root)}>
       <svg
         width="19"
         height="30"

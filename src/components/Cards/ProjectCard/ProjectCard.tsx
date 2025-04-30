@@ -7,15 +7,15 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Project } from "@/components/Pages/components/Projects/types";
+import { Project } from "@/components/Screens/components/Projects/types";
 import SvgIcons from "@/components/ui/SvgIcon/SvgIcon";
 
 const ProjectCard: FC<Project> = ({ title, image, link, description, technologies, status }) => {
   return (
-    <div className="flex relative flex-col w-[250px] h-[280px] sm:w-[320px] border rounded-lg shadow-sm bg-slate-800 border-slate-700">
+    <div className="relative flex h-[280px] w-[250px] flex-col rounded-lg border border-slate-700 bg-slate-800 shadow-sm sm:w-[320px]">
       <div
         className={cn(
-          "center absolute top-1 left-1 z-1 inline-block w-fit select-none whitespace-nowrap rounded-lg bg-amber-500 p-2 align-baseline font-sans text-sm font-bold uppercase leading-none text-white",
+          "center absolute top-1 left-1 z-1 inline-block w-fit rounded-lg bg-amber-500 p-2 align-baseline font-sans text-sm leading-none font-bold whitespace-nowrap text-white uppercase select-none",
           {
             "bg-teal-500": status === "production",
           },
@@ -23,7 +23,7 @@ const ProjectCard: FC<Project> = ({ title, image, link, description, technologie
         <div className="mt-px">{status}</div>
       </div>
 
-      <div className="relative w-full h-[120px]">
+      <div className="relative h-[120px] w-full">
         <Image
           className="rounded-t-lg"
           style={{ objectFit: "cover", width: "100%", height: "120px" }}
@@ -31,19 +31,19 @@ const ProjectCard: FC<Project> = ({ title, image, link, description, technologie
           alt={title}
         />
       </div>
-      <div className={"flex flex-col flex-1 p-3 gap-2 justify-between overflow-hidden"}>
-        <div className="flex flex-row justify-between overflow-hidden gap-3">
-          <h5 className="text-base md:text-2xl font-bold tracking-tight text-cyan-500 line-clamp-1 overflow-hidden text-wrap break-all">
+      <div className={"flex flex-1 flex-col justify-between gap-2 overflow-hidden p-3"}>
+        <div className="flex flex-row justify-between gap-3 overflow-hidden">
+          <h5 className="line-clamp-1 overflow-hidden text-base font-bold tracking-tight text-wrap break-all text-cyan-500 md:text-2xl">
             {title}
           </h5>
 
-          <Link href={link} target="_blank" className="bg-white rounded-sm h-[24px]">
+          <Link href={link} target="_blank" className="h-[24px] rounded-sm bg-white">
             <ChevronRight />
           </Link>
         </div>
         <p
           className={
-            "text-white text-sm md:text-base font-bold line-clamp-2 overflow-hidden text-wrap break-all"
+            "line-clamp-2 overflow-hidden text-sm font-bold text-wrap break-all text-white md:text-base"
           }>
           {description}
         </p>

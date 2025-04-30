@@ -1,12 +1,14 @@
 import { useGSAP } from "@gsap/react";
-import { Float, Text3D, useScroll } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { Float, Text3D } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import { useLayoutEffect, useRef } from "react";
 
 import { COLORS, portfolio } from "@/config";
+import { animations } from "@/constants";
 import { useMobile } from "@/hooks/useMobile";
 import { ThreeGroupRef } from "@/types";
 import gsap from "gsap";
+import * as THREE from "three";
 
 import { camera as cameraConfig } from "@/config/canvas";
 
@@ -25,31 +27,98 @@ const SECTIONS_DISTANCE = 10;
 const CanvasScene = () => {
   const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
   const camera = useThree((state) => state.camera);
+
+  const avatarRef = useRef<ThreeGroupRef>(undefined);
+  const floorRef = useRef<ThreeGroupRef>(undefined);
   const skillsRef = useRef<ThreeGroupRef>(undefined);
   const progRef = useRef<ThreeGroupRef>(undefined);
   const contactsRef = useRef<ThreeGroupRef>(undefined);
   const sceneContainer = useRef<ThreeGroupRef>(undefined);
+  const lastScroll = useRef(0);
+
+  const setAnimation = createSelectors(useAppStore).use.setAnimation();
 
   const { isMobile } = useMobile();
 
-  // const scrollData = useScroll();
-  // useFrame(() => {
-  //   if (!sceneContainer.current) return;
-  //
-  //   if (isMobile) {
-  //     sceneContainer.current.position.x =
-  //       -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
-  //     sceneContainer.current.position.z = 0;
-  //   } else {
-  //     sceneContainer.current.position.z =
-  //       -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
-  //     sceneContainer.current.position.x = 0;
-  //   }
-  //
-  //   setCurrentSection(portfolio.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]);
-  // });
+  const animAvatar = (progress: number) => {
+    const scrollDelta = progress - lastScroll.current;
+
+    let rotationTarget = 0;
+
+    if (Math.abs(scrollDelta) > 0.0001) {
+      setAnimation(animations.WALKING);
+      if (scrollDelta > 0) {
+        rotationTarget = isMobile ? Math.PI / 2 : 0;
+      } else {
+        rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
+      }
+    } else {
+      setAnimation(animations.IDLE);
+    }
+
+    if (avatarRef?.current?.rotation) {
+      avatarRef.current.rotation.y = THREE.MathUtils.lerp(
+        avatarRef.current.rotation.y,
+        rotationTarget,
+        0.1,
+      );
+    }
+
+    lastScroll.current = progress;
+  };
+
+  const animContainer = (progress: number) => {
+    if (!sceneContainer.current) return;
+
+    if (isMobile) {
+      sceneContainer.current.position.x =
+        -progress * SECTIONS_DISTANCE * (portfolio.sections.length - 1);
+      sceneContainer.current.position.z = 0;
+    } else {
+      sceneContainer.current.position.z =
+        -progress * SECTIONS_DISTANCE * (portfolio.sections.length - 1);
+      sceneContainer.current.position.x = 0;
+    }
+
+    setCurrentSection(portfolio.sections[Math.round(progress * (portfolio.sections.length - 1))]);
+  };
+
+  const animGround = (progress: number) => {
+    if (!floorRef.current) return;
+
+    if (isMobile) {
+      floorRef.current.position.x = -progress * (portfolio.sections.length - 1);
+    } else {
+      floorRef.current.position.z = -progress * (portfolio.sections.length - 1);
+    }
+  };
+
+  useLayoutEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   useGSAP(() => {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".screens",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        markers: true,
+        snap: {
+          snapTo: 1 / (portfolio.sections.length - 1),
+          duration: { min: 0.2, max: 3 },
+          delay: 0.2,
+          ease: "power1.inOut",
+        },
+        onUpdate: ({ progress }) => {
+          // animAvatar(progress);
+          animGround(progress);
+          animContainer(progress);
+        },
+      },
+    });
+
     if (!skillsRef?.current) return;
 
     gsap.fromTo(
@@ -66,10 +135,11 @@ const CanvasScene = () => {
       },
     );
   });
+
   return (
     <>
-      <Ground />
-      <Avatar />
+      <Ground ref={floorRef} />
+      {/* <Avatar ref={avatarRef} /> */}
 
       <group ref={sceneContainer}>
         {/* home */}

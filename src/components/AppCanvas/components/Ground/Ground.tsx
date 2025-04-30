@@ -1,30 +1,18 @@
 import { ContactShadows } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React, { FC, RefObject } from "react";
 
-import { useMobile } from "@/hooks/useMobile";
-import * as THREE from "three";
+import { ThreeGroupRef } from "@/types";
 
 import Floor from "@/components/AppCanvas/components/Ground/components/Floor/Floor";
 import JsLogo from "@/components/AppCanvas/models/JsLogo/JsLogo";
 
-const Ground = () => {
-  const floorRef = useRef<THREE.Group>(null);
-  // const scrollData = useScroll();
-  const { isMobile } = useMobile();
+interface GroundProps {
+  ref?: RefObject<ThreeGroupRef>;
+}
 
-  // useFrame(() => {
-  //   if (!floorRef.current) return;
-  //
-  //   if (isMobile) {
-  //     floorRef.current.position.x = -scrollData.offset * (scrollData.pages - 1);
-  //   } else {
-  //     floorRef.current.position.z = -scrollData.offset * (scrollData.pages - 1);
-  //   }
-  // });
-
+const Ground: FC<GroundProps> = ({ ref }) => {
   return (
-    <group ref={floorRef}>
+    <group ref={ref}>
       <ContactShadows opacity={0.5} scale={[30, 30]} color="#9c8e66" />
       <Floor />
       <JsLogo />

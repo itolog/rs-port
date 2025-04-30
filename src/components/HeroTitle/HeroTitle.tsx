@@ -29,7 +29,7 @@ const HeroTitle = () => {
   }, [currentSection, loading]);
 
   return (
-    <div ref={container} className={"fixed top-2 left-3 p-3 z-10"}>
+    <div ref={container} className={"fixed top-2 left-3 z-10 p-3"}>
       <span ref={textRef} style={{ color: COLORS.SECONDARY }} className={titleClass} />
     </div>
   );

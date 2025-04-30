@@ -1,7 +1,6 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { useScroll } from "@react-three/drei";
 import { useRef } from "react";
 
 import { pages } from "@/constants";
@@ -12,7 +11,7 @@ import { skills } from "@/config/portfolio";
 
 import ContactsCard from "@/components/Cards/ContactsCard/ContactsCard";
 import SkillCard from "@/components/Cards/SkillCard/SkillCard";
-import Projects from "@/components/Pages/components/Projects/Projects";
+import Projects from "@/components/Screens/components/Projects/Projects";
 import MouseIcon from "@/components/ui/MouseIcon/MouseIcon";
 
 import useAppStore from "@/store/appStore";
@@ -20,15 +19,16 @@ import createSelectors from "@/store/createSelectors";
 
 const commonStyle = "w-full h-dvh p-5";
 
-const Pages = () => {
+const Screens = () => {
   const mouseRef = useRef<HTMLDivElement>(null);
   const homeRef = useRef<HTMLDivElement>(null);
-  const scrollData = useScroll();
+
   const currentSection = createSelectors(useAppStore).use.currentSection();
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
+      gsap.to(mouseRef.current, {
+        opacity: 0,
         scrollTrigger: {
           trigger: homeRef.current,
           start: "top top",
@@ -36,28 +36,31 @@ const Pages = () => {
           scrub: 1,
         },
       });
-      console.log(currentSection);
-
-      tl.to(mouseRef.current, {
-        opacity: 0,
-      });
     },
     { dependencies: [currentSection] },
   );
 
   return (
-    <div className={"pages"}>
+    <div className={"screens"}>
       <section
         ref={homeRef}
         className={cl(pages.HOME, "flex items-end justify-center", commonStyle)}>
-        <MouseIcon ref={mouseRef} />
+        <MouseIcon classes={{ root: "z-10" }} ref={mouseRef} />
       </section>
-      <section className={cl("flex gap-2 items-end flex-col", pages.SKILLS, commonStyle)}>
+      <section className={cl(pages.SKILLS, "flex flex-col items-end gap-2", commonStyle)}>
         {skills.map((skill) => {
-          return <SkillCard key={skill} skill={skill} />;
+          return (
+            <SkillCard
+              classes={{
+                root: "skill-card",
+              }}
+              key={skill}
+              skill={skill}
+            />
+          );
         })}
       </section>
-      <section className={cl("flex justify-center w-full", pages.PROJECTS, commonStyle)}>
+      <section className={cl(pages.PROJECTS, "flex w-full justify-center", commonStyle)}>
         <Projects />
       </section>
       <section
@@ -72,4 +75,4 @@ const Pages = () => {
   );
 };
 
-export default Pages;
+export default Screens;

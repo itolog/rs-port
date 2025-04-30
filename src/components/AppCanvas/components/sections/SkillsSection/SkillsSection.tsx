@@ -6,7 +6,7 @@ import ReactLogo from "@/components/AppCanvas/models/ReactLogo/ReactLogo";
 const SkillsSection = () => {
   return (
     <group>
-      {/* <ReactLogo /> */}
+      <ReactLogo />
       <HtmlLogo />
     </group>
   );

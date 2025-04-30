@@ -1,8 +1,10 @@
-import { useGLTF, useScroll } from "@react-three/drei";
-import { ObjectMap, useFrame } from "@react-three/fiber";
+import { useGSAP } from "@gsap/react";
+import { useGLTF } from "@react-three/drei";
+import { ObjectMap } from "@react-three/fiber";
 import React, { useRef } from "react";
 
-import { models } from "@/config";
+import { models, portfolio } from "@/config";
+import gsap from "gsap";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 
@@ -19,11 +21,23 @@ type GLTFResult = GLTF &
 const ReactLogo = () => {
   const { nodes, materials } = useGLTF(models.reactUrl) as GLTFResult;
   const ref = useRef<THREE.Group | null>(null);
-  const scrollState = useScroll();
 
-  useFrame(() => {
-    if (!ref.current) return;
-    ref.current.rotation.y = scrollState.offset * 10;
+  useGSAP(() => {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".screens",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        markers: true,
+        snap: 1 / (portfolio.sections.length - 1),
+        onUpdate: (self) => {
+          if (ref.current) {
+            ref.current.rotation.y = self.progress * 10;
+          }
+        },
+      },
+    });
   });
 
   return (
