@@ -14,31 +14,23 @@ import SkillCard from "@/components/Cards/SkillCard/SkillCard";
 import Projects from "@/components/Screens/components/Projects/Projects";
 import MouseIcon from "@/components/ui/MouseIcon/MouseIcon";
 
-import useAppStore from "@/store/appStore";
-import createSelectors from "@/store/createSelectors";
-
 const commonStyle = "w-full h-dvh p-5";
 
 const Screens = () => {
   const mouseRef = useRef<HTMLDivElement>(null);
   const homeRef = useRef<HTMLDivElement>(null);
 
-  const currentSection = createSelectors(useAppStore).use.currentSection();
-
-  useGSAP(
-    () => {
-      gsap.to(mouseRef.current, {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: homeRef.current,
-          start: "top top",
-          end: "+=500",
-          scrub: 1,
-        },
-      });
-    },
-    { dependencies: [currentSection] },
-  );
+  useGSAP(() => {
+    gsap.to(mouseRef.current, {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: homeRef.current,
+        start: "top top",
+        end: "+=500",
+        scrub: 1,
+      },
+    });
+  });
 
   return (
     <div className={"screens"}>

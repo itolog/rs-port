@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 import { COLORS, portfolio } from "@/config";
 import cl from "clsx";
@@ -18,15 +19,18 @@ const HeroTitle = () => {
   const container = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
-    if (!textRef.current || loading) return;
+  useGSAP(
+    () => {
+      if (!textRef.current || loading) return;
 
-    gsap.to(textRef.current, {
-      text: portfolio.sectionsTitle[currentSection as keyof typeof portfolio.sectionsTitle],
-      duration: 2,
-      ease: "easeInOut",
-    });
-  }, [currentSection, loading]);
+      gsap.to(textRef.current, {
+        text: portfolio.sectionsTitle[currentSection as keyof typeof portfolio.sectionsTitle],
+        duration: 2,
+        ease: "easeInOut",
+      });
+    },
+    { dependencies: [currentSection, loading] },
+  );
 
   return (
     <div ref={container} className={"fixed top-2 left-3 z-10 p-3"}>

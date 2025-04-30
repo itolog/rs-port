@@ -25,8 +25,9 @@ import createSelectors from "@/store/createSelectors";
 const SECTIONS_DISTANCE = 10;
 
 const CanvasScene = () => {
-  const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
   const camera = useThree((state) => state.camera);
+
+  const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
 
   const avatarRef = useRef<ThreeGroupRef>(undefined);
   const floorRef = useRef<ThreeGroupRef>(undefined);
@@ -79,8 +80,6 @@ const CanvasScene = () => {
         -progress * SECTIONS_DISTANCE * (portfolio.sections.length - 1);
       sceneContainer.current.position.x = 0;
     }
-
-    setCurrentSection(portfolio.sections[Math.round(progress * (portfolio.sections.length - 1))]);
   };
 
   const animGround = (progress: number) => {
@@ -104,7 +103,6 @@ const CanvasScene = () => {
         start: "top top",
         end: "bottom bottom",
         scrub: true,
-        markers: true,
         snap: {
           snapTo: 1 / (portfolio.sections.length - 1),
           duration: { min: 0.2, max: 3 },
@@ -115,6 +113,10 @@ const CanvasScene = () => {
           // animAvatar(progress);
           animGround(progress);
           animContainer(progress);
+
+          setCurrentSection(
+            portfolio.sections[Math.round(progress * (portfolio.sections.length - 1))],
+          );
         },
       },
     });
