@@ -29,7 +29,6 @@ const ReactLogo = () => {
         start: "top top",
         end: "bottom bottom",
         scrub: true,
-        markers: true,
         snap: 1 / (portfolio.sections.length - 1),
         onUpdate: (self) => {
           if (ref.current) {
