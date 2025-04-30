@@ -1,13 +1,14 @@
 import { useGSAP } from "@gsap/react";
 import { Float, Text3D } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { useLayoutEffect, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 
 import { COLORS, portfolio } from "@/config";
 import { animations } from "@/constants";
 import { useMobile } from "@/hooks/useMobile";
 import { ThreeGroupRef } from "@/types";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
 
 import { camera as cameraConfig } from "@/config/canvas";
@@ -41,74 +42,83 @@ const CanvasScene = () => {
 
   const { isMobile } = useMobile();
 
-  const animAvatar = (progress: number) => {
-    const scrollDelta = progress - lastScroll.current;
+  const animAvatar = useCallback(
+    (progress: number) => {
+      const scrollDelta = progress - lastScroll.current;
 
-    let rotationTarget = 0;
+      let rotationTarget = 0;
 
-    if (Math.abs(scrollDelta) > 0.0001) {
-      setAnimation(animations.WALKING);
-      if (scrollDelta > 0) {
-        rotationTarget = isMobile ? Math.PI / 2 : 0;
+      if (Math.abs(scrollDelta) > 0.0001) {
+        setAnimation(animations.WALKING);
+        if (scrollDelta > 0) {
+          rotationTarget = isMobile ? Math.PI / 2 : 0;
+        } else {
+          rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
+        }
       } else {
-        rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
+        setAnimation(animations.IDLE);
       }
-    } else {
-      setAnimation(animations.IDLE);
-    }
 
-    if (avatarRef?.current?.rotation) {
-      avatarRef.current.rotation.y = THREE.MathUtils.lerp(
-        avatarRef.current.rotation.y,
-        rotationTarget,
-        0.1,
-      );
-    }
+      if (avatarRef?.current?.rotation) {
+        avatarRef.current.rotation.y = THREE.MathUtils.lerp(
+          avatarRef.current.rotation.y,
+          rotationTarget,
+          0.1,
+        );
+      }
 
-    lastScroll.current = progress;
-  };
+      lastScroll.current = progress;
+    },
+    [isMobile, setAnimation],
+  );
 
-  const animContainer = (progress: number) => {
-    if (!sceneContainer.current) return;
+  const animContainer = useCallback(
+    (progress: number) => {
+      if (!sceneContainer.current) return;
 
-    if (isMobile) {
-      sceneContainer.current.position.x =
-        -progress * SECTIONS_DISTANCE * (portfolio.sections.length - 1);
-      sceneContainer.current.position.z = 0;
-    } else {
-      sceneContainer.current.position.z =
-        -progress * SECTIONS_DISTANCE * (portfolio.sections.length - 1);
-      sceneContainer.current.position.x = 0;
-    }
-  };
+      if (isMobile) {
+        sceneContainer.current.position.x =
+          -progress * SECTIONS_DISTANCE * (portfolio.sections.length - 1);
+        sceneContainer.current.position.z = 0;
+      } else {
+        sceneContainer.current.position.z =
+          -progress * SECTIONS_DISTANCE * (portfolio.sections.length - 1);
+        sceneContainer.current.position.x = 0;
+      }
+    },
+    [isMobile],
+  );
 
-  const animGround = (progress: number) => {
-    if (!floorRef.current) return;
+  const animGround = useCallback(
+    (progress: number) => {
+      if (!floorRef.current) return;
 
-    if (isMobile) {
-      floorRef.current.position.x = -progress * (portfolio.sections.length - 1);
-    } else {
-      floorRef.current.position.z = -progress * (portfolio.sections.length - 1);
-    }
-  };
+      if (isMobile) {
+        floorRef.current.position.x = -progress * (portfolio.sections.length - 1);
+      } else {
+        floorRef.current.position.z = -progress * (portfolio.sections.length - 1);
+      }
+    },
+    [isMobile],
+  );
 
   useLayoutEffect(() => {
     window.scroll(0, 0);
   }, []);
 
-  useGSAP(() => {
-    gsap.timeline({
-      scrollTrigger: {
+  useGSAP(
+    () => {
+      ScrollTrigger.create({
         trigger: ".screens",
         start: "top top",
         end: "bottom bottom",
         scrub: true,
-        snap: {
-          snapTo: 1 / (portfolio.sections.length - 1),
-          duration: { min: 0.2, max: 3 },
-          delay: 0.2,
-          ease: "power1.inOut",
-        },
+        // snap: {
+        //   snapTo: 1 / (portfolio.sections.length - 1),
+        //   duration: { min: 0.2, max: 3 },
+        //   delay: 0.2,
+        //   ease: "power1.inOut",
+        // },
         onUpdate: ({ progress }) => {
           // animAvatar(progress);
           animGround(progress);
@@ -118,25 +128,26 @@ const CanvasScene = () => {
             portfolio.sections[Math.round(progress * (portfolio.sections.length - 1))],
           );
         },
-      },
-    });
+      });
 
-    if (!skillsRef?.current) return;
+      if (!skillsRef?.current) return;
 
-    gsap.fromTo(
-      camera.position,
-      { y: 10, z: 10 },
-      {
-        y: 3,
-        z: cameraConfig.position.z,
-        ease: "power1.out",
-        duration: 1,
-        onUpdate: () => {
-          camera.lookAt(0, 0, 0);
+      gsap.fromTo(
+        camera.position,
+        { y: 10, z: 10 },
+        {
+          y: 3,
+          z: cameraConfig.position.z,
+          ease: "power1.out",
+          duration: 1,
+          onUpdate: () => {
+            camera.lookAt(0, 0, 0);
+          },
         },
-      },
-    );
-  });
+      );
+    },
+    { dependencies: [animContainer, animGround, camera] },
+  );
 
   return (
     <>

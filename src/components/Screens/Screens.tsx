@@ -30,6 +30,18 @@ const Screens = () => {
         scrub: 1,
       },
     });
+
+    gsap.from(".skill-card", {
+      x: 210,
+      opacity: 0,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: `.${pages.SKILLS}`,
+        start: "top top+=40%",
+        end: "top top+=10%",
+        scrub: true,
+      },
+    });
   });
 
   return (
