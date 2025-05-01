@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei";
 import { ObjectMap } from "@react-three/fiber";
 import React, { useRef } from "react";
 
-import { models, portfolio } from "@/config";
+import { models } from "@/config";
 import gsap from "gsap";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
