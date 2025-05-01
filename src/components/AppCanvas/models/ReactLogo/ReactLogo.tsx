@@ -28,7 +28,6 @@ const ReactLogo = () => {
         trigger: ".screens",
         start: "top top",
         end: "bottom bottom",
-        snap: 1 / (portfolio.sections.length - 1),
         onUpdate: (self) => {
           if (ref.current) {
             ref.current.rotation.y = self.progress * 10;

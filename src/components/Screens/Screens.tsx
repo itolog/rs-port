@@ -14,7 +14,7 @@ import SkillCard from "@/components/Cards/SkillCard/SkillCard";
 import Projects from "@/components/Screens/components/Projects/Projects";
 import MouseIcon from "@/components/ui/MouseIcon/MouseIcon";
 
-const commonStyle = "w-full h-dvh p-5";
+const commonStyle = "w-full overflow-hidden h-dvh p-5";
 
 const Screens = () => {
   const mouseRef = useRef<HTMLDivElement>(null);

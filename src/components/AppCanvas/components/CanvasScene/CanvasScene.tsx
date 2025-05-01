@@ -113,12 +113,12 @@ const CanvasScene = () => {
         start: "top top",
         end: "bottom bottom",
         scrub: true,
-        // snap: {
-        //   snapTo: 1 / (portfolio.sections.length - 1),
-        //   duration: { min: 0.2, max: 3 },
-        //   delay: 0.2,
-        //   ease: "power1.inOut",
-        // },
+        snap: {
+          snapTo: 1 / (portfolio.sections.length - 1),
+          duration: { min: 0.2, max: 3 },
+          delay: 0.3,
+          ease: "power1.inOut",
+        },
         onUpdate: ({ progress }) => {
           // animAvatar(progress);
           animGround(progress);
