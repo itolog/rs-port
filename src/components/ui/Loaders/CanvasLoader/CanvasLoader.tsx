@@ -22,7 +22,7 @@ const CanvasLoader = () => {
       className={cn(
         "fixed z-100 flex h-screen w-screen flex-col items-center justify-center gap-2 bg-slate-900",
         {
-          "hidden opacity-0": !active && loading === false,
+          "hidden opacity-0": !active && !loading,
         },
       )}>
       <div
