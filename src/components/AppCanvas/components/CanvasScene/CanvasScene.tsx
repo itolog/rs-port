@@ -1,7 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import { Float, Text3D } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { useCallback, useLayoutEffect, useRef } from "react";
+import { useCallback, useRef } from "react";
 
 import { COLORS, portfolio } from "@/config";
 import { animations } from "@/constants";
@@ -102,10 +102,6 @@ const CanvasScene = () => {
     [isMobile],
   );
 
-  useLayoutEffect(() => {
-    window.scroll(0, 0);
-  }, []);
-
   useGSAP(
     () => {
       ScrollTrigger.create({
@@ -140,6 +136,7 @@ const CanvasScene = () => {
         },
       );
     },
+
     { dependencies: [animContainer, animGround, camera] },
   );
 

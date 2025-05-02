@@ -3,6 +3,7 @@
 import { LenisRef, ReactLenis } from "lenis/react";
 import { ReactNode, useEffect, useRef } from "react";
 
+import useScrollRestoration from "@/hooks/useScrollRestoration";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
@@ -10,6 +11,8 @@ import { TextPlugin } from "gsap/TextPlugin";
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 export default function Template({ children }: { children: ReactNode }) {
+  useScrollRestoration();
+
   const lenisRef = useRef<LenisRef>(null);
 
   useEffect(() => {
