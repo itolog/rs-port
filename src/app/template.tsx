@@ -3,7 +3,6 @@
 import { LenisRef, ReactLenis } from "lenis/react";
 import { ReactNode, useEffect, useRef } from "react";
 
-import { portfolio } from "@/config";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
@@ -36,7 +35,7 @@ export default function Template({ children }: { children: ReactNode }) {
       options={{
         autoRaf: false,
         easing,
-        lerp: 1 / portfolio.sections.length,
+        duration: 4,
       }}
       ref={lenisRef}>
       {children}
