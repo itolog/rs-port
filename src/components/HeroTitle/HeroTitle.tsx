@@ -21,7 +21,7 @@ const HeroTitle = () => {
 
   useGSAP(
     () => {
-      if (!textRef.current || loading) return;
+      if (!textRef.current || loading === undefined || loading) return;
 
       gsap.to(textRef.current, {
         text: portfolio.sectionsTitle[currentSection as keyof typeof portfolio.sectionsTitle],

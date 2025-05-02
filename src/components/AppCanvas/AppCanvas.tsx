@@ -3,11 +3,17 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 
+import dynamic from "next/dynamic";
+
 import CanvasScene from "@/components/AppCanvas/components/CanvasScene/CanvasScene";
 import Common from "@/components/AppCanvas/components/Common/Common";
 import HeroTitle from "@/components/HeroTitle/HeroTitle";
-import Screens from "@/components/Screens/Screens";
 import CanvasLoader from "@/components/ui/Loaders/CanvasLoader/CanvasLoader";
+import PoLoader from "@/components/ui/Loaders/PoLoader/PoLoader";
+
+const Screens = dynamic(() => import("@/components/Screens/Screens"), {
+  loading: () => <PoLoader />,
+});
 
 const AppCanvas = () => {
   return (
@@ -22,6 +28,7 @@ const AppCanvas = () => {
           </group>
         </Suspense>
       </Canvas>
+
       <Screens />
     </>
   );

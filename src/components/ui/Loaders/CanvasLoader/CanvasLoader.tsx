@@ -10,7 +10,7 @@ const CanvasLoader = () => {
   const { active, progress, loaded, total } = useProgress();
 
   const setLoading = createSelectors(useAppStore).use.setLoading();
-
+  const loading = createSelectors(useAppStore).use.loading();
   useEffect(() => {
     if (progress === 100) {
       setLoading(false);
@@ -20,10 +20,9 @@ const CanvasLoader = () => {
   return (
     <div
       className={cn(
-        "fixed z-100 flex h-screen w-screen flex-col items-center justify-center gap-2",
+        "fixed z-100 flex h-screen w-screen flex-col items-center justify-center gap-2 bg-slate-900",
         {
-          "opacity-0": !active ? 1 : 0,
-          hidden: !active ? 1 : 0,
+          "hidden opacity-0": !active && loading === false,
         },
       )}>
       <div
