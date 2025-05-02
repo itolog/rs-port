@@ -1,21 +1,16 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect } from "react";
 
-import cl from "clsx";
+import { cn } from "@/lib/utils";
 
 import useAppStore from "@/store/appStore";
 import createSelectors from "@/store/createSelectors";
 
 const CanvasLoader = () => {
-  const { active, progress } = useProgress();
+  const { active, progress, loaded, total } = useProgress();
 
   const setLoading = createSelectors(useAppStore).use.setLoading();
-
-  const rootClass = cl("fixed flex justify-center items-center w-screen h-screen loading z-50", {
-    "opacity-0": !active ? 1 : 0,
-    hidden: !active ? 1 : 0,
-  });
-
+  const loading = createSelectors(useAppStore).use.loading();
   useEffect(() => {
     if (progress === 100) {
       setLoading(false);
@@ -23,8 +18,37 @@ const CanvasLoader = () => {
   }, [progress, setLoading]);
 
   return (
-    <div className={rootClass}>
-      <span className={"text-4xl text-cyan-300"}>{parseInt(progress.toString())} % loaded</span>
+    <div
+      className={cn(
+        "fixed z-100 flex h-screen w-screen flex-col items-center justify-center gap-2 bg-slate-900",
+        {
+          "hidden opacity-0": !active && loading === false,
+        },
+      )}>
+      <div
+        className={
+          "grid w-[300px] grid-cols-2 items-center justify-center text-2xl font-black text-cyan-400"
+        }>
+        <span className={"text-center"}>Loaded:</span>
+
+        <span>
+          {loaded} / {total}
+        </span>
+      </div>
+      <div
+        className={cn(
+          "relative flex h-[100px] w-[300px] items-center justify-center rounded-md border-5 border-[#00ffff40] p-4 text-4xl",
+          "after:absolute after:right-[-24px] after:h-[50px] after:w-[15px] after:rounded-tr-md after:rounded-br-md after:bg-[#00ffff40]",
+        )}>
+        <div
+          className={cn("absolute inset-0 rounded-sm bg-cyan-400")}
+          style={{
+            width: `${progress}%`,
+            transition: "width 1s ease-in-out",
+          }}
+        />
+        <span className={"z-1 font-bold text-white"}>{parseInt(progress.toString())} %</span>
+      </div>
     </div>
   );
 };
