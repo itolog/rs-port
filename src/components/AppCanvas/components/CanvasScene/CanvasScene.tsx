@@ -1,6 +1,7 @@
 import { Float, Text3D, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { animate, useMotionValue } from "motion/react";
+import { useEffect, useRef } from "react";
 
 import { COLORS, portfolio } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
@@ -19,6 +20,7 @@ import createSelectors from "@/store/createSelectors";
 const SECTIONS_DISTANCE = 10;
 
 const CanvasScene = () => {
+  const camera = useThree((state) => state.camera);
   const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
 
   const skillsRef = useRef<ThreeGroupRef>(undefined);
@@ -27,6 +29,10 @@ const CanvasScene = () => {
   const sceneContainer = useRef<ThreeGroupRef>(undefined);
 
   const { isMobile } = useMobile();
+
+  const camY = useMotionValue(10);
+  const camZ = useMotionValue(10);
+  const camX = useMotionValue(10);
 
   const scrollData = useScroll();
   useFrame(() => {
@@ -43,6 +49,23 @@ const CanvasScene = () => {
     }
 
     setCurrentSection(portfolio.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]);
+  });
+
+  useEffect(() => {
+    const animations = [
+      animate(camY, 3, { duration: 1 }),
+      animate(camX, 0, { duration: 1 }),
+      animate(camZ, 5, { duration: 1 }),
+    ];
+
+    return () => animations.forEach((a) => a.stop());
+  }, [camX, camY, camZ]);
+
+  useFrame(() => {
+    camera.position.y = camY.get();
+    camera.position.z = camZ.get();
+    camera.position.x = camX.get();
+    camera.lookAt(0, 0, 0);
   });
 
   return (

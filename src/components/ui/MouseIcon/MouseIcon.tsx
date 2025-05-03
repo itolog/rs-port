@@ -1,5 +1,7 @@
+import { useScroll } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import { motion } from "motion/react";
-import { FC, Ref } from "react";
+import { FC, Ref, useState } from "react";
 
 import styles from "./styles.module.css";
 
@@ -8,10 +10,25 @@ interface MouseIconProps {
 }
 
 const MouseIcon: FC<MouseIconProps> = ({ ref }) => {
+  const scrollData = useScroll();
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useFrame(() => {
+    setHasScrolled(scrollData.offset > 0.003);
+  });
+
   return (
     <motion.div
-      initial={{ y: 0, opacity: 0 }}
-      whileInView={{ y: 10, opacity: 1 }}
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: hasScrolled ? 0 : 1,
+        y: hasScrolled ? -40 : 0,
+      }}
+      transition={{
+        ease: "easeInOut",
+      }}
       ref={ref}
       className={styles.MouseIcon}>
       <svg
