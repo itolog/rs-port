@@ -1,12 +1,9 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import { useScroll } from "@react-three/drei";
 import { useRef } from "react";
 
 import { pages } from "@/constants";
 import cl from "clsx";
-import gsap from "gsap";
 
 import { skills } from "@/config/portfolio";
 
@@ -20,23 +17,6 @@ const commonStyle = "w-full h-dvh p-5";
 const Pages = () => {
   const mouseRef = useRef<HTMLDivElement>(null);
   const homeRef = useRef<HTMLDivElement>(null);
-  const scrollData = useScroll();
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: homeRef.current,
-        start: "top top",
-        end: "+=500",
-        scrub: 1,
-        scroller: scrollData.el,
-      },
-    });
-
-    tl.to(mouseRef.current, {
-      opacity: 0,
-    });
-  });
 
   return (
     <>

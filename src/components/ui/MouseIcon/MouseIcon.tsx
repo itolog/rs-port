@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { FC, Ref } from "react";
 
 import styles from "./styles.module.css";
@@ -8,7 +9,11 @@ interface MouseIconProps {
 
 const MouseIcon: FC<MouseIconProps> = ({ ref }) => {
   return (
-    <div ref={ref} className={styles.MouseIcon}>
+    <motion.div
+      initial={{ y: 0, opacity: 0 }}
+      whileInView={{ y: 10, opacity: 1 }}
+      ref={ref}
+      className={styles.MouseIcon}>
       <svg
         width="19"
         height="30"
@@ -28,7 +33,7 @@ const MouseIcon: FC<MouseIconProps> = ({ ref }) => {
           className={styles.Cursor}
         />
       </svg>
-    </div>
+    </motion.div>
   );
 };
 

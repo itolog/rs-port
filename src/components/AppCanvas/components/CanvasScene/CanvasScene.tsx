@@ -1,14 +1,10 @@
-import { useGSAP } from "@gsap/react";
 import { Float, Text3D, useScroll } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
 import { COLORS, portfolio } from "@/config";
 import { useMobile } from "@/hooks/useMobile";
 import { ThreeGroupRef } from "@/types";
-import gsap from "gsap";
-
-import { camera as cameraConfig } from "@/config/canvas";
 
 import Ground from "@/components/AppCanvas/components/Ground/Ground";
 import ContactsSection from "@/components/AppCanvas/components/sections/ContactsSection/ContactsSection";
@@ -24,7 +20,7 @@ const SECTIONS_DISTANCE = 10;
 
 const CanvasScene = () => {
   const setCurrentSection = createSelectors(useAppStore).use.setCurrentSection();
-  const camera = useThree((state) => state.camera);
+
   const skillsRef = useRef<ThreeGroupRef>(undefined);
   const progRef = useRef<ThreeGroupRef>(undefined);
   const contactsRef = useRef<ThreeGroupRef>(undefined);
@@ -49,23 +45,6 @@ const CanvasScene = () => {
     setCurrentSection(portfolio.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]);
   });
 
-  useGSAP(() => {
-    if (!skillsRef?.current) return;
-
-    gsap.fromTo(
-      camera.position,
-      { y: 10, z: 10 },
-      {
-        y: 3,
-        z: cameraConfig.position.z,
-        ease: "power1.out",
-        duration: 1,
-        onUpdate: () => {
-          camera.lookAt(0, 0, 0);
-        },
-      },
-    );
-  });
   return (
     <>
       <Ground />
