@@ -46,15 +46,15 @@ const Projects: FC<ProjectsProps> = ({ ref }) => {
   }, [api, handleSlidesInViewOnce]);
 
   return (
-    <div className="w-fit h-fit sm:w-full sm:h-full pl-0 sm:pl-16">
+    <div className={"pl-0 sm:pl-16"}>
       <Carousel
         ref={ref}
-        className="max-w-xs"
+        className="max-w-xs h-fit "
         opts={{
           loop: true,
         }}
         setApi={setApi}>
-        <CarouselContent className={"w-[270px] h-fit sm:w-[320px]"}>
+        <CarouselContent className={"w-[270px] sm:w-auto"}>
           {projectsData.map((props, index) => {
             return (
               <CarouselItem key={index}>

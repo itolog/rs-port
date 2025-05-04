@@ -56,15 +56,9 @@ const Pages = () => {
           })}
         </motion.ul>
       </section>
-      <section className={cn("flex justify-center w-full", pages.PROJECTS, commonStyle)}>
-        <MotionProjects
-          whileInView={ANIMATION_TYPE.VISIBLE}
-          initial={ANIMATION_TYPE.HIDDEN}
-          variants={ANIMATION.SLIDE_IN}
-          transition={{
-            ease: "easeOut",
-          }}
-        />
+      <section
+        className={cn("flex   justify-center md:justify-start", pages.PROJECTS, commonStyle)}>
+        <MotionProjects {...ANIMATION.SLIDE_IN} />
       </section>
       <section
         className={cn(
@@ -72,11 +66,7 @@ const Pages = () => {
           "flex items-center justify-center md:justify-start",
           commonStyle,
         )}>
-        <MotionContactsCard
-          whileInView={ANIMATION_TYPE.VISIBLE}
-          initial={ANIMATION_TYPE.HIDDEN}
-          variants={ANIMATION.SLIDE_IN}
-        />
+        <MotionContactsCard {...ANIMATION.SLIDE_IN} />
       </section>
     </>
   );

@@ -26,13 +26,26 @@ export const ANIMATION = {
     },
   },
   SLIDE_IN: {
-    [ANIMATION_TYPE.HIDDEN]: {
-      x: "100%",
-      rotate: 90,
+    whileInView: ANIMATION_TYPE.VISIBLE,
+    initial: ANIMATION_TYPE.HIDDEN,
+    variants: {
+      [ANIMATION_TYPE.HIDDEN]: {
+        opacity: 0,
+        x: -200,
+        rotate: 90,
+      },
+      [ANIMATION_TYPE.VISIBLE]: {
+        opacity: 1,
+        x: 0,
+        rotate: 0,
+      },
     },
-    [ANIMATION_TYPE.VISIBLE]: {
-      x: 0,
-      rotate: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.5,
+      visualDuration: 0.4,
+      ease: "easeOut",
     },
+    viewport: { amount: 0.3 },
   },
 };
