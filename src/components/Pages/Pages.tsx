@@ -33,30 +33,34 @@ const Pages = () => {
       </section>
       <section
         className={cn(pages.SKILLS, "flex gap-2 items-end flex-wrap content-start", commonStyle)}>
-        {skills.map((skill, index) => {
-          return (
-            <MotionSkillCard
-              classes={{
-                root: "w-fit md:w-60",
-                title: "hidden md:block",
-              }}
-              whileInView={ANIMATION_TYPE.VISIBLE}
-              initial={ANIMATION_TYPE.HIDDEN}
-              variants={ANIMATION.SKILLS}
-              transition={{
-                delay: index * 0.09,
-              }}
-              skill={skill}
-              key={skill}
-            />
-          );
-        })}
+        <motion.ul
+          className={"flex gap-2 items-end flex-wrap content-start"}
+          initial="hidden"
+          whileInView="visible"
+          variants={ANIMATION.SKILLS.list}>
+          {skills.map((skill, index) => {
+            return (
+              <MotionSkillCard
+                classes={{
+                  root: "w-fit md:w-60",
+                  title: "hidden md:block",
+                }}
+                custom={index}
+                variants={ANIMATION.SKILLS.item}
+                whileInView={ANIMATION_TYPE.VISIBLE}
+                initial={ANIMATION_TYPE.HIDDEN}
+                skill={skill}
+                key={skill}
+              />
+            );
+          })}
+        </motion.ul>
       </section>
       <section className={cn("flex justify-center w-full", pages.PROJECTS, commonStyle)}>
         <MotionProjects
           whileInView={ANIMATION_TYPE.VISIBLE}
           initial={ANIMATION_TYPE.HIDDEN}
-          variants={ANIMATION.PROJECTS}
+          variants={ANIMATION.SLIDE_IN}
           transition={{
             ease: "easeOut",
           }}
@@ -71,7 +75,7 @@ const Pages = () => {
         <MotionContactsCard
           whileInView={ANIMATION_TYPE.VISIBLE}
           initial={ANIMATION_TYPE.HIDDEN}
-          variants={ANIMATION.CONTACTS}
+          variants={ANIMATION.SLIDE_IN}
         />
       </section>
     </>

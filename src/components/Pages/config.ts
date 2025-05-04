@@ -5,35 +5,34 @@ export const ANIMATION_TYPE = {
 
 export const ANIMATION = {
   SKILLS: {
-    [ANIMATION_TYPE.HIDDEN]: {
-      opacity: 0,
-      x: 100,
+    list: {
+      [ANIMATION_TYPE.VISIBLE]: {
+        opacity: 1,
+        transition: {
+          when: "beforeChildren",
+          staggerChildren: 0.3,
+        },
+      },
+      [ANIMATION_TYPE.HIDDEN]: {
+        opacity: 0,
+        transition: {
+          when: "afterChildren",
+        },
+      },
     },
-    [ANIMATION_TYPE.VISIBLE]: {
-      opacity: 1,
-      x: 0,
+    item: {
+      [ANIMATION_TYPE.VISIBLE]: { opacity: 1, scale: 1 },
+      [ANIMATION_TYPE.HIDDEN]: { opacity: 0, scale: 0 },
     },
   },
-  PROJECTS: {
+  SLIDE_IN: {
     [ANIMATION_TYPE.HIDDEN]: {
-      opacity: 0,
-      x: 400,
+      x: "100%",
       rotate: 90,
     },
     [ANIMATION_TYPE.VISIBLE]: {
-      opacity: 1,
       x: 0,
       rotate: 0,
-    },
-  },
-  CONTACTS: {
-    [ANIMATION_TYPE.HIDDEN]: {
-      opacity: 0,
-      y: 400,
-    },
-    [ANIMATION_TYPE.VISIBLE]: {
-      opacity: 1,
-      y: 0,
     },
   },
 };
