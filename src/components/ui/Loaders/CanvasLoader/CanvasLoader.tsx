@@ -44,7 +44,7 @@ const CanvasLoader = () => {
           className={cn("absolute inset-0 rounded-sm bg-cyan-400")}
           style={{
             width: `${progress}%`,
-            transition: "width 1s ease-in-out",
+            transition: "width .4s ease-in-out",
           }}
         />
         <span className={"z-1 font-bold text-white"}>{parseInt(progress.toString())} %</span>
